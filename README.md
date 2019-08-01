@@ -28,7 +28,7 @@
 ## Utilizzo
 1. Accedere all'applicativo tramite l'url del server / appdss:
     ```
-    http://www.example.com/sicla
+    http://www.example.com/appdss
     ```    
 2. Effettuare il login: 
    - Username : appdss
