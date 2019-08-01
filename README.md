@@ -1,4 +1,4 @@
-## SICLA - SIstema Concertativo
+## APPDSS
 ## Tech/framework utilizzati
 - [Ext JS](https://www.sencha.com/products/extjs/)
 - [CakePHP](https://cakephp.org/)
