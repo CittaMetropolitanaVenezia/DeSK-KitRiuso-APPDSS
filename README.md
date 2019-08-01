@@ -23,7 +23,7 @@
     ```
     sudo chmod -R 777 [nome_cartella]
     ```
-5. Aprire il file *app.php* all'interno della cartella config e configurare la connessione al DB (Datasources -> default)
+5. Aprire il file *app.php* all'interno della cartella config e configurare la connessione al DB (Datasources -> default);
 6. Popolare la tabella 'limiti_comunali' del DB con i dati delle città desiderate.
 ## Utilizzo
 1. Accedere all'applicativo tramite l'url del server / appdss:
@@ -33,6 +33,6 @@
 2. Effettuare il login: 
    - Username : appdss
    - Password : appdss2019
-   2.1 L'utente con cui si effettuerà il login è un utente Admin, il quale ha accesso al pannello di amministrazione. Saranno presenti          delle impostazioni di esempio, per il funzionamento dell'applicativo è neccessario modificarle e renderle veritiere rispetto al          vostro server.
-3. Per creare un nuovo progetto, aprire la scheda dedicata e seguire le indicazioni sovrastanti.
+3. L'utente con cui si effettuerà il login è un utente Admin, il quale ha accesso al pannello di amministrazione. Saranno presenti          delle impostazioni di esempio, per il funzionamento dell'applicativo è neccessario modificarle e renderle veritiere rispetto al          vostro server.
+4. Per creare un nuovo progetto, aprire la scheda dedicata e seguire le indicazioni sovrastanti.
 
