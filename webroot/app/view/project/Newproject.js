@@ -98,8 +98,7 @@ Ext.define('APPDSS.view.project.Newproject', {
         items: [{
                     xtype: 'displayfield',
                     id: 'wizardfield2',
-                    value: "<b>CREAZIONE DI UN PROGETTO</b><br><b>1.</b> Caricare tramite apposito pulsante un fileshape di tipo <b>POLYGON/MULTIPOLYGON</b>,inserire i dati richiesti, poi premere <b>IMPORTA</b>;  <span style='color:green'>&#10003;</span>"+
-                            "<br><b>2.</b> Caricare tramite apposito pulsante il fileshape interessato, poi premere <b>IMPORTA</b>;",                
+                    value: "<b>CREAZIONE DI UN PROGETTO</b><br><b>1.</b> Caricare tramite apposito pulsante un fileshape di tipo <b>POLYGON/MULTIPOLYGON</b> in proiezione <b>32632</b>, inserire i dati richiesti, poi premere <b>IMPORTA</b>;",               
                 },
                 {
                     xtype: 'restfileupload',
