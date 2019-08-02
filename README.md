@@ -23,7 +23,7 @@
     ```
     sudo chmod -R 777 [nome_cartella]
     ```
-5. Aprire il file *app.php* all'interno della cartella config e configurare la connessione al DB (Datasources -> default);
+5. Rinominare il file *app.default.php* in *app.php* all'interno della cartella config, aprirlo e configurare la connessione al DB (Datasources -> default);
 6. Popolare la tabella 'limiti_comunali' del DB con i dati delle città desiderate.
 ## Utilizzo
 1. Accedere all'applicativo tramite l'url del server / appdss:
