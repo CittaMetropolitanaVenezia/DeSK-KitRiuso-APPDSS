@@ -399,7 +399,7 @@ class ThematizerController extends AppController
 						  MAXSCALEDENOM   1500000
 						  METADATA
 						    WMS_TITLE   "'.strtoupper($projectName).'"
-						    WMS_SRS   "epsg:32632 epsg:4326 epsg:900913 epsg:3857"
+						    WMS_SRS   "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633"
 						    WMS_ONLINERESOURCE   "'.$_SERVER['HTTP_ORIGIN'].'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'.map"
 						    WMS_FEATURE_INFO_MIME_TYPE   "text/html"
 						    WMS_ABSTRACT   ""
@@ -615,7 +615,7 @@ class ThematizerController extends AppController
 						  MAXSCALEDENOM   1500000
 						  METADATA
 						    WMS_TITLE   "'.strtoupper($projectName).'_QUADRO'.'"
-						    WMS_SRS   "epsg:32632 epsg:4326 epsg:900913 epsg:3857"
+						    WMS_SRS   "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633"
 						    WMS_ONLINERESOURCE   "http://172.16.100.146/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'_quadro'.'.map"
 						    WMS_FEATURE_INFO_MIME_TYPE   "text/html"
 						    WMS_ABSTRACT   ""
@@ -661,7 +661,7 @@ class ThematizerController extends AppController
 						   METADATA
 						     WMS_ENABLE_REQUEST "*"
 						     ORNAME   "quadro"
-						     WMS_SRS  "epsg:32632"
+						     WMS_SRS  "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633"
 						     WMS_TITLE  "quadro"
 						     WMS_FEATURE_INFO_MIME_TYPE  "text/html"
 						   END    
