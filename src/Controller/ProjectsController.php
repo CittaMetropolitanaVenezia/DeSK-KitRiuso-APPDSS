@@ -145,9 +145,18 @@ class ProjectsController extends AppController
 			$conn ->execute("DROP TABLE IF EXISTS ".$wms_table."");
 		}
         if ($this->Projects->delete($project)) {
-			unlink(ROOT.'/mapfiles/'.$filesName.'.map') or die('Impossibile eliminare il mapfile');
-			unlink(ROOT.'/mapfiles/'.$filesName.'_quadro.map') or die('Impossibile eliminare il mapfile dell\'inquadramento');
-			unlink(WWW_ROOT.$filesName.'.pdf') or die('Impossibile eliminare il pdf ');
+			$mapFile = ROOT.'/mapfiles/'.$filesName.'.map';
+			$mapquadroFile = ROOT.'/mapfiles/'.$filesName.'_quadro.map';
+			$pdfFile = WWW_ROOT.$filesName.'.pdf';
+			if(file_exists($mapFile)){
+				unlink($mapFile);
+			}
+			if(file_exists($mapquadroFile)){
+				unlink($mapquadroFile);
+			}
+			if(file_exists($pdfFile)){
+				unlink($pdfFile);
+			}
             $success = true;           
         } else {
             $success = false;
