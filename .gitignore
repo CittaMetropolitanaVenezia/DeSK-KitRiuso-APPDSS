@@ -2,8 +2,7 @@
 ##########################
 /config/app.php
 /config/.env
-/logs/*
-/tmp/*
+
 
 # OS generated files #
 ######################
