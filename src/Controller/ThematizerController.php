@@ -544,7 +544,7 @@ class ThematizerController extends AppController
 		$content.='METADATA
 							 ORNAME "'.$layer_name.'"
 							 WMS_ENABLE_REQUEST "*"
-							 WMS_SRS  "epsg:32632"
+							 WMS_SRS  "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633"
 							 WMS_TITLE  "'.$layer_name.'"
 							 WMS_INCLUDE_ITEMS "all"
 							 WMS_FEATURE_INFO_MIME_TYPE  "text/html"	
