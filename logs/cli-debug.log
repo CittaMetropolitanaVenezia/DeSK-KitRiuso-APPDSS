@@ -1,0 +1,148 @@
+2019-07-03 12:57:36 Notice: Deprecated (16384): The `[method]` option is deprecated. Use `_method` instead. - C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Routing\RouteBuilder.php, line: 825
+ You can disable deprecation warnings by setting `Error.errorLevel` to `E_ALL & ~E_USER_DEPRECATED` in your config/app.php. in [C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Core\functions.php, line 311]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 159
+deprecationWarning - CORE\src\Core\functions.php, line 311
+Cake\Routing\Route\Route::__construct() - CORE\src\Routing\Route\Route.php, line 131
+Cake\Routing\RouteBuilder::_makeRoute() - CORE\src\Routing\RouteBuilder.php, line 825
+Cake\Routing\RouteBuilder::connect() - CORE\src\Routing\RouteBuilder.php, line 740
+Cake\Http\BaseApplication::{closure}() - ROOT\config\routes.php, line 49
+Cake\Routing\RouteBuilder::scope() - CORE\src\Routing\RouteBuilder.php, line 1009
+Cake\Routing\Router::scope() - CORE\src\Routing\Router.php, line 1098
+require - ROOT\config\routes.php, line 50
+Cake\Http\BaseApplication::routes() - CORE\src\Http\BaseApplication.php, line 179
+Cake\Console\CommandRunner::loadRoutes() - CORE\src\Console\CommandRunner.php, line 419
+Cake\Console\CommandRunner::run() - CORE\src\Console\CommandRunner.php, line 146
+[main] - ROOT\bin\cake.php, line 12
+
+
+
+2019-07-03 12:57:36 Notice: Deprecated (16384): The `[method]` option is deprecated. Use `_method` instead. - C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Routing\RouteBuilder.php, line: 825
+ You can disable deprecation warnings by setting `Error.errorLevel` to `E_ALL & ~E_USER_DEPRECATED` in your config/app.php. in [C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Core\functions.php, line 311]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 159
+deprecationWarning - CORE\src\Core\functions.php, line 311
+Cake\Routing\Route\Route::__construct() - CORE\src\Routing\Route\Route.php, line 131
+Cake\Routing\RouteBuilder::_makeRoute() - CORE\src\Routing\RouteBuilder.php, line 825
+Cake\Routing\RouteBuilder::connect() - CORE\src\Routing\RouteBuilder.php, line 740
+Cake\Http\BaseApplication::{closure}() - ROOT\config\routes.php, line 53
+Cake\Routing\RouteBuilder::scope() - CORE\src\Routing\RouteBuilder.php, line 1009
+Cake\Routing\Router::scope() - CORE\src\Routing\Router.php, line 1098
+require - ROOT\config\routes.php, line 55
+Cake\Http\BaseApplication::routes() - CORE\src\Http\BaseApplication.php, line 179
+Cake\Console\CommandRunner::loadRoutes() - CORE\src\Console\CommandRunner.php, line 419
+Cake\Console\CommandRunner::run() - CORE\src\Console\CommandRunner.php, line 146
+[main] - ROOT\bin\cake.php, line 12
+
+
+
+2019-07-03 12:57:36 Notice: Deprecated (16384): The `[method]` option is deprecated. Use `_method` instead. - C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Routing\RouteBuilder.php, line: 825
+ You can disable deprecation warnings by setting `Error.errorLevel` to `E_ALL & ~E_USER_DEPRECATED` in your config/app.php. in [C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Core\functions.php, line 311]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 159
+deprecationWarning - CORE\src\Core\functions.php, line 311
+Cake\Routing\Route\Route::__construct() - CORE\src\Routing\Route\Route.php, line 131
+Cake\Routing\RouteBuilder::_makeRoute() - CORE\src\Routing\RouteBuilder.php, line 825
+Cake\Routing\RouteBuilder::connect() - CORE\src\Routing\RouteBuilder.php, line 740
+Cake\Http\BaseApplication::{closure}() - ROOT\config\routes.php, line 54
+Cake\Routing\RouteBuilder::scope() - CORE\src\Routing\RouteBuilder.php, line 1009
+Cake\Routing\Router::scope() - CORE\src\Routing\Router.php, line 1098
+require - ROOT\config\routes.php, line 55
+Cake\Http\BaseApplication::routes() - CORE\src\Http\BaseApplication.php, line 179
+Cake\Console\CommandRunner::loadRoutes() - CORE\src\Console\CommandRunner.php, line 419
+Cake\Console\CommandRunner::run() - CORE\src\Console\CommandRunner.php, line 146
+[main] - ROOT\bin\cake.php, line 12
+
+
+
+2019-07-03 12:57:36 Notice: Deprecated (16384): RouteBuilder::extensions() is deprecated. Use RouteBuilder::setExtensions()/getExtensions() instead. - C:\DEVEL\PROG\APPDSS\config\routes.php, line: 58
+ You can disable deprecation warnings by setting `Error.errorLevel` to `E_ALL & ~E_USER_DEPRECATED` in your config/app.php. in [C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Core\functions.php, line 311]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 159
+deprecationWarning - CORE\src\Core\functions.php, line 311
+Cake\Routing\RouteBuilder::extensions() - CORE\src\Routing\RouteBuilder.php, line 202
+Cake\Http\BaseApplication::{closure}() - ROOT\config\routes.php, line 58
+Cake\Routing\RouteBuilder::scope() - CORE\src\Routing\RouteBuilder.php, line 1009
+Cake\Routing\Router::scope() - CORE\src\Routing\Router.php, line 1098
+require - ROOT\config\routes.php, line 61
+Cake\Http\BaseApplication::routes() - CORE\src\Http\BaseApplication.php, line 179
+Cake\Console\CommandRunner::loadRoutes() - CORE\src\Console\CommandRunner.php, line 419
+Cake\Console\CommandRunner::run() - CORE\src\Console\CommandRunner.php, line 146
+[main] - ROOT\bin\cake.php, line 12
+
+
+
+2019-07-03 13:13:16 Notice: Deprecated (16384): The `[method]` option is deprecated. Use `_method` instead. - C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Routing\RouteBuilder.php, line: 825
+ You can disable deprecation warnings by setting `Error.errorLevel` to `E_ALL & ~E_USER_DEPRECATED` in your config/app.php. in [C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Core\functions.php, line 311]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 159
+deprecationWarning - CORE\src\Core\functions.php, line 311
+Cake\Routing\Route\Route::__construct() - CORE\src\Routing\Route\Route.php, line 131
+Cake\Routing\RouteBuilder::_makeRoute() - CORE\src\Routing\RouteBuilder.php, line 825
+Cake\Routing\RouteBuilder::connect() - CORE\src\Routing\RouteBuilder.php, line 740
+Cake\Http\BaseApplication::{closure}() - ROOT\config\routes.php, line 49
+Cake\Routing\RouteBuilder::scope() - CORE\src\Routing\RouteBuilder.php, line 1009
+Cake\Routing\Router::scope() - CORE\src\Routing\Router.php, line 1098
+require - ROOT\config\routes.php, line 50
+Cake\Http\BaseApplication::routes() - CORE\src\Http\BaseApplication.php, line 179
+Cake\Console\CommandRunner::loadRoutes() - CORE\src\Console\CommandRunner.php, line 419
+Cake\Console\CommandRunner::run() - CORE\src\Console\CommandRunner.php, line 146
+[main] - ROOT\bin\cake.php, line 12
+
+
+
+2019-07-03 13:13:16 Notice: Deprecated (16384): The `[method]` option is deprecated. Use `_method` instead. - C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Routing\RouteBuilder.php, line: 825
+ You can disable deprecation warnings by setting `Error.errorLevel` to `E_ALL & ~E_USER_DEPRECATED` in your config/app.php. in [C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Core\functions.php, line 311]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 159
+deprecationWarning - CORE\src\Core\functions.php, line 311
+Cake\Routing\Route\Route::__construct() - CORE\src\Routing\Route\Route.php, line 131
+Cake\Routing\RouteBuilder::_makeRoute() - CORE\src\Routing\RouteBuilder.php, line 825
+Cake\Routing\RouteBuilder::connect() - CORE\src\Routing\RouteBuilder.php, line 740
+Cake\Http\BaseApplication::{closure}() - ROOT\config\routes.php, line 53
+Cake\Routing\RouteBuilder::scope() - CORE\src\Routing\RouteBuilder.php, line 1009
+Cake\Routing\Router::scope() - CORE\src\Routing\Router.php, line 1098
+require - ROOT\config\routes.php, line 55
+Cake\Http\BaseApplication::routes() - CORE\src\Http\BaseApplication.php, line 179
+Cake\Console\CommandRunner::loadRoutes() - CORE\src\Console\CommandRunner.php, line 419
+Cake\Console\CommandRunner::run() - CORE\src\Console\CommandRunner.php, line 146
+[main] - ROOT\bin\cake.php, line 12
+
+
+
+2019-07-03 13:13:16 Notice: Deprecated (16384): The `[method]` option is deprecated. Use `_method` instead. - C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Routing\RouteBuilder.php, line: 825
+ You can disable deprecation warnings by setting `Error.errorLevel` to `E_ALL & ~E_USER_DEPRECATED` in your config/app.php. in [C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Core\functions.php, line 311]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 159
+deprecationWarning - CORE\src\Core\functions.php, line 311
+Cake\Routing\Route\Route::__construct() - CORE\src\Routing\Route\Route.php, line 131
+Cake\Routing\RouteBuilder::_makeRoute() - CORE\src\Routing\RouteBuilder.php, line 825
+Cake\Routing\RouteBuilder::connect() - CORE\src\Routing\RouteBuilder.php, line 740
+Cake\Http\BaseApplication::{closure}() - ROOT\config\routes.php, line 54
+Cake\Routing\RouteBuilder::scope() - CORE\src\Routing\RouteBuilder.php, line 1009
+Cake\Routing\Router::scope() - CORE\src\Routing\Router.php, line 1098
+require - ROOT\config\routes.php, line 55
+Cake\Http\BaseApplication::routes() - CORE\src\Http\BaseApplication.php, line 179
+Cake\Console\CommandRunner::loadRoutes() - CORE\src\Console\CommandRunner.php, line 419
+Cake\Console\CommandRunner::run() - CORE\src\Console\CommandRunner.php, line 146
+[main] - ROOT\bin\cake.php, line 12
+
+
+
+2019-07-03 13:13:16 Notice: Deprecated (16384): RouteBuilder::extensions() is deprecated. Use RouteBuilder::setExtensions()/getExtensions() instead. - C:\DEVEL\PROG\APPDSS\config\routes.php, line: 58
+ You can disable deprecation warnings by setting `Error.errorLevel` to `E_ALL & ~E_USER_DEPRECATED` in your config/app.php. in [C:\DEVEL\PROG\APPDSS\vendor\cakephp\cakephp\src\Core\functions.php, line 311]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 159
+deprecationWarning - CORE\src\Core\functions.php, line 311
+Cake\Routing\RouteBuilder::extensions() - CORE\src\Routing\RouteBuilder.php, line 202
+Cake\Http\BaseApplication::{closure}() - ROOT\config\routes.php, line 58
+Cake\Routing\RouteBuilder::scope() - CORE\src\Routing\RouteBuilder.php, line 1009
+Cake\Routing\Router::scope() - CORE\src\Routing\Router.php, line 1098
+require - ROOT\config\routes.php, line 61
+Cake\Http\BaseApplication::routes() - CORE\src\Http\BaseApplication.php, line 179
+Cake\Console\CommandRunner::loadRoutes() - CORE\src\Console\CommandRunner.php, line 419
+Cake\Console\CommandRunner::run() - CORE\src\Console\CommandRunner.php, line 146
+[main] - ROOT\bin\cake.php, line 12
+
+
+
