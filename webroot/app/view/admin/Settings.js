@@ -40,7 +40,7 @@ Ext.define('APPDSS.view.admin.Settings', {
             },
             defaultType: 'textfield',
             items: [
-                { fieldLabel: 'Proiezione',  name: 'displayProj', allowBlank: false, anchor: '70%', readOnly: true},
+                { fieldLabel: 'Proiezione',  name: 'displayProj', allowBlank: false, anchor: '70%'},
                 { fieldLabel: 'Directory funzioni postgres', name: 'sql_shp_path', allowBlank: false, anchor: '70%'},
 				{ fieldLabel: 'x min', name: 'x_min', allowBlank: false, anchor: '70%'},
 				{ fieldLabel: 'y min', name: 'y_min', allowBlank: false, anchor: '70%'},
