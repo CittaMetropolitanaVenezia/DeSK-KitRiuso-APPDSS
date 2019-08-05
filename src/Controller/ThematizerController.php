@@ -369,10 +369,20 @@ class ThematizerController extends AppController
 		$queryResult = $conn->execute('SELECT proj4text FROM spatial_ref_sys WHERE auth_srid = '.$proj);
 		$projection = $queryResult ->fetchAll('assoc');
 		
+		$queryTownsEpsg = $conn->execute("SELECT srid FROM geometry_columns WHERE f_table_name ='limiti_comunali'");
+		$townsEpsg = $queryTownsEpsg->fetchAll('assoc')[0]['srid'];
+		$townsProjQuery = $conn->execute('SELECT proj4text FROM spatial_ref_sys WHERE auth_srid = '.$townsEpsg);
+		$townsProj = $townsProjQuery ->fetchAll('assoc');
+		$townsProj = explode('+',$townsProj[0]['proj4text']);
+		foreach($townsProj as $key => $value){
+			$townsProj[$key] = trim($value);
+		}
+		$townsProj = array_values(array_filter($townsProj));		
 		$projection = explode('+',$projection[0]['proj4text']);
 		foreach($projection as $key => $value){
 			$projection[$key] = trim($value);
 		}
+		
 		$projection = array_values(array_filter($projection));
 		$content = 'MAP
 						NAME "'.strtoupper($projectName).'"
@@ -399,7 +409,7 @@ class ThematizerController extends AppController
 						  MAXSCALEDENOM   1500000
 						  METADATA
 						    WMS_TITLE   "'.strtoupper($projectName).'"
-						    WMS_SRS   "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633"
+						    WMS_SRS   "epsg:'.$proj.' epsg:'.$townsEpsg.'"
 						    WMS_ONLINERESOURCE   "'.$_SERVER['HTTP_ORIGIN'].'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'.map"
 						    WMS_FEATURE_INFO_MIME_TYPE   "text/html"
 						    WMS_ABSTRACT   ""
@@ -434,7 +444,7 @@ class ThematizerController extends AppController
 						   CONNECTION   "user='.$dbconf['username'].' dbname='.$dbconf['database'].' host='.$dbconf['host'].' password='.$dbconf['password'].' port='.$dbconf['port'].'"
 						   CONNECTIONTYPE  postgis
 						   TYPE  '.$shapeType.'
-						   DATA   "'.$geomColumn.' from '.$wms_table.' USING UNIQUE gid USING srid = '.$proj.'"
+						   DATA   "'.$geomColumn.' from '.$wms_table.' USING UNIQUE gid"
 						   OPACITY '.$opacity.'
 						   LABELITEM   "'.$labelcolumn.'"
 						   CLASSITEM   "'.$themacolumn.'" 
@@ -544,7 +554,7 @@ class ThematizerController extends AppController
 		$content.='METADATA
 							 ORNAME "'.$layer_name.'"
 							 WMS_ENABLE_REQUEST "*"
-							 WMS_SRS  "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633"
+							 WMS_SRS  "epsg:'.$proj.'"
 							 WMS_TITLE  "'.$layer_name.'"
 							 WMS_INCLUDE_ITEMS "all"
 							 WMS_FEATURE_INFO_MIME_TYPE  "text/html"	
@@ -558,7 +568,7 @@ class ThematizerController extends AppController
 						   CONNECTION   "user='.$dbconf['username'].' dbname='.$dbconf['database'].' host='.$dbconf['host'].' password='.$dbconf['password'].' port='.$dbconf['port'].'"
 						   CONNECTIONTYPE  postgis
 						   TYPE  POLYGON
-						   DATA   "the_geom from limiti_comunali USING UNIQUE gid USING srid = 32632"
+						   DATA   "the_geom from limiti_comunali USING UNIQUE gid"
 						   #LABELITEM   "name"
 						   CLASS						   
 						      NAME  "limiti"
@@ -576,10 +586,17 @@ class ThematizerController extends AppController
 								#TYPE  truetype
 							 # END    
 						   END
+						  
+						   PROJECTION
+						   '; foreach($townsProj as $key => $value){
+								$content.='"'.$value.'" ';
+									};
+						   $content.=' 
+						   END 
 						   METADATA
 						     WMS_ENABLE_REQUEST "*"
 						     ORNAME   "limiti_comunali"
-						     WMS_SRS  "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633"
+						     WMS_SRS  "epsg:'.$townsEpsg.'"
 						     WMS_TITLE  "limiti_comunali"
 						     WMS_FEATURE_INFO_MIME_TYPE  "text/html"
 						   END    
@@ -603,7 +620,7 @@ class ThematizerController extends AppController
 						IMAGECOLOR   255 255 255
 						PROJECTION 
 							';
-		foreach($projection as $key => $value){
+		foreach($townsProj as $key => $value){
 			$contentQuadro.='"'.$value.'" ';
 		}	
 		$contentQuadro.='
@@ -615,7 +632,7 @@ class ThematizerController extends AppController
 						  MAXSCALEDENOM   1500000
 						  METADATA
 						    WMS_TITLE   "'.strtoupper($projectName).'_QUADRO'.'"
-						    WMS_SRS   "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633"
+						    WMS_SRS   "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:'.$townsEpsg.'"
 						    WMS_ONLINERESOURCE   "http://172.16.100.146/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'_quadro'.'.map"
 						    WMS_FEATURE_INFO_MIME_TYPE   "text/html"
 						    WMS_ABSTRACT   ""
@@ -639,7 +656,7 @@ class ThematizerController extends AppController
 						   CONNECTION   "user='.$dbconf['username'].' dbname='.$dbconf['database'].' host='.$dbconf['host'].' password='.$dbconf['password'].' port='.$dbconf['port'].'"
 						   CONNECTIONTYPE  postgis
 						   TYPE  POLYGON
-						   DATA   "the_geom from limiti_comunali USING UNIQUE gid USING srid = 32632"
+						   DATA   "the_geom from limiti_comunali USING UNIQUE gid"
 						   #LABELITEM   "name"
 						   CLASS						   
 						      NAME  "limiti"
@@ -661,7 +678,7 @@ class ThematizerController extends AppController
 						   METADATA
 						     WMS_ENABLE_REQUEST "*"
 						     ORNAME   "quadro"
-						     WMS_SRS  "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633"
+						     WMS_SRS  "epsg:'.$townsEpsg.'"
 						     WMS_TITLE  "quadro"
 						     WMS_FEATURE_INFO_MIME_TYPE  "text/html"
 						   END    
