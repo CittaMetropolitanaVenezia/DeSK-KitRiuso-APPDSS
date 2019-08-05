@@ -1,4 +1,5 @@
 ## APPDSS
+Applicativo atto alla realizzazione di mappe cartografiche tematiche. 
 ## Tech/framework utilizzati
 - [Ext JS](https://www.sencha.com/products/extjs/)
 - [CakePHP](https://cakephp.org/)
