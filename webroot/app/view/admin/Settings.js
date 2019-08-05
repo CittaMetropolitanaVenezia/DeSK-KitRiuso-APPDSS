@@ -23,7 +23,7 @@ Ext.define('APPDSS.view.admin.Settings', {
             style: {
                 marginTop: '5px'
             },
-            title: 'Mapfile - General',
+            title: 'Mapfile - Generale',
             collapsed: false,
             collapsible: true,
            // allowBlank: false,
