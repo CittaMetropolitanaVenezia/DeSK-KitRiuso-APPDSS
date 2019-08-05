@@ -6,7 +6,7 @@ Applicativo atto alla realizzazione di mappe cartografiche tematiche.
 ## Prerequisiti
 - PHP **5.6.x**
 - Apache **2.x** con queste estensioni:
-  - initl
+  - intl
   - mbstring
   - libxml
   - pdo_pgsql
