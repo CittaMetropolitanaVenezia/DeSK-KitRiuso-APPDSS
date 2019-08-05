@@ -209,7 +209,6 @@ class ThematizerController extends AppController
 		$mapfileDir = ROOT.DS.'mapfiles/';
 		$mapfileName = $this->normalizeString($project_name);	
 		$map = $mapfileDir.$mapfileName.'.map';
-		if(!file_exists($map)){
 			$output = $this->generateMapfile($data);
 			if(!$output){
 				$this->autoRender = 0;
@@ -218,8 +217,7 @@ class ThematizerController extends AppController
 					'msg' => 'Impossibile generare il pdf in questo momento. Controllare che siano inseriti tutti i dati della classificazione.',
 					'data' => array()
 				));
-			}
-		}
+			}		
 			$wms_conf = json_decode($fetchedProject['wms_conf'],true);
 			$layers = $wms_conf['layer_name'].',limiti_comunali';
 			$format = 'image/png';
