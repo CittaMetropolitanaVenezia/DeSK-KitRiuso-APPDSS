@@ -23,7 +23,7 @@ Ext.define('APPDSS.view.admin.Settings', {
             style: {
                 marginTop: '5px'
             },
-            title: 'Mapfile - EPSG:32632',
+            title: 'Mapfile - General',
             collapsed: false,
             collapsible: true,
            // allowBlank: false,
