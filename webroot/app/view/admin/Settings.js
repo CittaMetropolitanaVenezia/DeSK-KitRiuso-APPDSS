@@ -40,7 +40,10 @@ Ext.define('APPDSS.view.admin.Settings', {
             },
             defaultType: 'textfield',
             items: [
-                { fieldLabel: 'Proiezione',  name: 'displayProj', allowBlank: false, anchor: '70%'},
+                { fieldLabel: 'Proiezione',  name: 'displayProj', allowBlank: false, anchor: '70%', autoEl: {
+				  tag: 'div',
+				  'data-qtip': 'Questa proiezione DEVE corrispondere alla proiezione dei dati caricati come primo shape durante la creazione dei progetti'
+				},},
                 { fieldLabel: 'Directory funzioni postgres', name: 'sql_shp_path', allowBlank: false, anchor: '70%'},
 				{ fieldLabel: 'x min', name: 'x_min', allowBlank: false, anchor: '70%'},
 				{ fieldLabel: 'y min', name: 'y_min', allowBlank: false, anchor: '70%'},
