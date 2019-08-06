@@ -584,13 +584,6 @@ class ThematizerController extends AppController
 								#TYPE  truetype
 							 # END    
 						   END
-						  
-						   PROJECTION
-						   '; foreach($townsProj as $key => $value){
-								$content.='"'.$value.'" ';
-									};
-						   $content.=' 
-						   END 
 						   METADATA
 						     WMS_ENABLE_REQUEST "*"
 						     ORNAME   "limiti_comunali"
