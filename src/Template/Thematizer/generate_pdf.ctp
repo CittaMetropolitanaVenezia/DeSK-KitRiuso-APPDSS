@@ -7,7 +7,7 @@ class xtcpdf extends TCPDF {
 	$pdf->Cell(320,280,'',1,0);
 	$pdf->Image($mapImage,12,12);
 	$pdf->Cell(80,40,'',1,2);
-	$pdf->Image('./resources/images/venice.png',340,15,60);
+	$pdf->Image('./resources/images/city.png',340,15,60);
 	//$pdf->Cell(80,40,'Descrizione',1,2);
 	$pdf->WriteHtmlCell(80,40,330,50,'<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$projectName.'</b><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$descTitle.'<div style="font-size:10">'.$projectDesc.'</div>',1,2);
 	$pdf->Line(330,60,410,60);
