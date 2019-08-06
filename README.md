@@ -1,11 +1,12 @@
 ## APPDSS
+Applicativo atto alla realizzazione di mappe cartografiche tematiche. 
 ## Tech/framework utilizzati
 - [Ext JS](https://www.sencha.com/products/extjs/)
 - [CakePHP](https://cakephp.org/)
 ## Prerequisiti
 - PHP **5.6.x**
 - Apache **2.x** con queste estensioni:
-  - initl
+  - intl
   - mbstring
   - libxml
   - pdo_pgsql
@@ -33,7 +34,7 @@
 2. Effettuare il login: 
    - Username : appdss
    - Password : appdss2019
-3. L'utente con cui si effettuerà il login è un utente Admin, il quale ha accesso al pannello di amministrazione. Saranno presenti          delle impostazioni di esempio, per il funzionamento dell'applicativo è neccessario modificarle e renderle veritiere rispetto al          vostro server.
+3. L'utente con cui si effettuerà il login è un utente Admin, il quale ha accesso al pannello di amministrazione. Saranno presenti          delle impostazioni di esempio, per il funzionamento dell'applicativo è necessario modificarle e renderle veritiere rispetto al          vostro server.
 4. Per creare un nuovo progetto, aprire la scheda dedicata e seguire le indicazioni sovrastanti.
 
 ## Indicazioni Generali
