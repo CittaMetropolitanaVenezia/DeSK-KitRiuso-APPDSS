@@ -407,7 +407,7 @@ class ThematizerController extends AppController
 						  MAXSCALEDENOM   1500000
 						  METADATA
 						    WMS_TITLE   "'.strtoupper($projectName).'"
-						    WMS_SRS   "epsg:'.$proj.' epsg:'.$townsEpsg.'"
+						    WMS_SRS   "epsg:'.$proj.' epsg:'.$townsEpsg.' epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:3395"
 						    WMS_ONLINERESOURCE   "'.$_SERVER['HTTP_ORIGIN'].'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'.map"
 						    WMS_FEATURE_INFO_MIME_TYPE   "text/html"
 						    WMS_ABSTRACT   ""
@@ -553,7 +553,7 @@ class ThematizerController extends AppController
 							 ORNAME "'.$layer_name.'"
 							 WMS_ENABLE_REQUEST "*"
 							 WMS_SRS  "epsg:'.$proj.'"
-							 WMS_TITLE  "'.$layer_name.'"
+							 WMS_TITLE  "'.$layer_name.' epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:3395"
 							 WMS_INCLUDE_ITEMS "all"
 							 WMS_FEATURE_INFO_MIME_TYPE  "text/html"	
 						   END    
@@ -594,7 +594,7 @@ class ThematizerController extends AppController
 						   METADATA
 						     WMS_ENABLE_REQUEST "*"
 						     ORNAME   "limiti_comunali"
-						     WMS_SRS  "epsg:'.$townsEpsg.'"
+						     WMS_SRS  "epsg:'.$townsEpsg.' epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:3395"
 						     WMS_TITLE  "limiti_comunali"
 						     WMS_FEATURE_INFO_MIME_TYPE  "text/html"
 						   END    
@@ -630,7 +630,7 @@ class ThematizerController extends AppController
 						  MAXSCALEDENOM   1500000
 						  METADATA
 						    WMS_TITLE   "'.strtoupper($projectName).'_QUADRO'.'"
-						    WMS_SRS   "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:'.$townsEpsg.'"
+						    WMS_SRS   "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:3395 epsg:'.$townsEpsg.'"
 						    WMS_ONLINERESOURCE   "http://172.16.100.146/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'_quadro'.'.map"
 						    WMS_FEATURE_INFO_MIME_TYPE   "text/html"
 						    WMS_ABSTRACT   ""
@@ -676,7 +676,7 @@ class ThematizerController extends AppController
 						   METADATA
 						     WMS_ENABLE_REQUEST "*"
 						     ORNAME   "quadro"
-						     WMS_SRS  "epsg:'.$townsEpsg.'"
+						     WMS_SRS  "epsg:'.$townsEpsg.' epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:3395"
 						     WMS_TITLE  "quadro"
 						     WMS_FEATURE_INFO_MIME_TYPE  "text/html"
 						   END    
