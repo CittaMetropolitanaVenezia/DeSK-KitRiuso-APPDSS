@@ -30,11 +30,14 @@ Ext.define('APPDSS.ux.LeafletMapView', {
 					L.latLng(xmax,ymax)
 							
 				);
+				var ss = 'EPSG'+data.ll_displayProj;
+				var crs = L.CRS[ss];
 				mapOptions = {
 						maxBounds: maxBounds,
 						minZoom: 7,
 						maxZoom: 18,
-						zoomControl: false
+						zoomControl: false,
+						crs: crs
 					};
 				var map = L.map(me.getId(), mapOptions);
 							
