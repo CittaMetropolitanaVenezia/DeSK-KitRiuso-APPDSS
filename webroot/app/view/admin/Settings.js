@@ -72,7 +72,30 @@ Ext.define('APPDSS.view.admin.Settings', {
             },
             defaultType: 'textfield',
             items: [
-				{ fieldLabel: 'Proiezione',  name: 'll_displayProj', allowBlank: false, anchor: '70%',readOnly: true},
+				//{ fieldLabel: 'Proiezione',  name: 'll_displayProj', allowBlank: false, anchor: '70%',readOnly: true},
+		    		{
+					xtype: 'combobox',
+					fieldLabel: 'Proiezione',
+					typeAhead: true,
+					triggerAction: 'all',
+					forceSelection: true,
+					msgTarget: 'under',
+					queryMode: 'local',
+					displayField: 'proj',
+					valueField: 'proj',
+					name: 'll_displayProj',			
+					allowBlank: false,					
+					anchor: '70%',
+					store : Ext.create('Ext.data.Store', {
+							fields: ['proj'],
+							data : [
+								{"proj":"3395"},
+								{"proj":"3857"},
+								{"proj":"4326"},
+								{"proj":"900913"},						
+							]
+						})
+				},
 				{ fieldLabel: 'x min', name: 'll_x_min', allowBlank: false, anchor: '70%'},
 				{ fieldLabel: 'y min', name: 'll_y_min', allowBlank: false, anchor: '70%'},
 				{ fieldLabel: 'x max', name: 'll_x_max', allowBlank: false, anchor: '70%'},
