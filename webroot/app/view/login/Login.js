@@ -25,7 +25,10 @@ Ext.define('APPDSS.view.login.Login', {
             name: 'password',
             inputType: 'password',
             fieldLabel: 'Password',
-            allowBlank: false
+            allowBlank: false,
+			listeners: {
+				specialkey: 'onEnter'
+			}
         }],
         buttons: [{
             text: 'Login',

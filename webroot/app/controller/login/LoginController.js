@@ -56,5 +56,10 @@ Ext.define('APPDSS.controller.login.LoginController', {
             Ext.Msg.alert('Attenzione', 'Le password non corrispondono.');
         }
         
+    },
+	onEnter : function(field, e) {
+        if (e.getKey() == e.ENTER) {
+            this.onLoginClick();
+        }
     }
 });
