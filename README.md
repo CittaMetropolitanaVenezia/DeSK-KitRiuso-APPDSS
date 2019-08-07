@@ -38,8 +38,8 @@ Applicativo atto alla realizzazione di mappe cartografiche tematiche.
 4. Per creare un nuovo progetto, aprire la scheda dedicata e seguire le indicazioni sovrastanti.
 
 ## Indicazioni Generali
-1. La proiezione nelle impostazioni generali DEVE corrispondere alla proiezione dei file shape caricati allo step 1 della creazione di un progetto;
-2. La proiezione della tabella 'limiti_comunali' può essere cambiata in base alla vostra preferenza, basterà droppare la colonna the geom già esistente e aggiungerne un'altra con questa query
+1. Le impostazioni del mapfile devono essere coerenti con i dati degli shape file inseriti allo step 1 della creazione di un progetto;
+2. La proiezione della tabella 'limiti_comunali' può essere cambiata in base alla vostra preferenza, basterà droppare la colonna the geom già esistente e aggiungerne un'altra con questa query.
     ```
     SELECT AddGeometryColumn ('public','limiti_comunali','the_geom',[PROIEZIONE],'MULTIPOLYGON',2);
     ```
