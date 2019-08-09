@@ -94,7 +94,8 @@ Ext.define('APPDSS.view.main.Main', {
     },{
         title: 'Crea progetto',		
         iconCls: 'fa-edit',
-        
+	xtype: 'panel',
+	layout: 'fit',
         items: [{
             xtype: 'new-project',
 			id: 'create_project_tab',
