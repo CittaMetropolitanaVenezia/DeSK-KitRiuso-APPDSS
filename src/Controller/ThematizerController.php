@@ -343,6 +343,7 @@ class ThematizerController extends AppController
 		$myFile = CONFIG."settings.ini";
         $settings = parse_ini_file($myFile,true);
 		$proj = $settings['displayProj'];
+		$ll_proj = $settings['ll_displayProj'];
 		$xmin = $settings['x_min'];
 		$ymin = $settings['y_min'];
 		$xmax = $settings['x_max'];
@@ -407,7 +408,7 @@ class ThematizerController extends AppController
 						  MAXSCALEDENOM   1500000
 						  METADATA
 						    WMS_TITLE   "'.strtoupper($projectName).'"
-						    WMS_SRS   "epsg:'.$proj.' epsg:'.$townsEpsg.' epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:3395"
+						    WMS_SRS   "epsg:'.$proj.' epsg:'.$townsEpsg.' epsg:'.$ll_proj.'" 
 						    WMS_ONLINERESOURCE   "'.$_SERVER['HTTP_ORIGIN'].'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'.map"
 						    WMS_FEATURE_INFO_MIME_TYPE   "text/html"
 						    WMS_ABSTRACT   ""
@@ -552,8 +553,8 @@ class ThematizerController extends AppController
 		$content.='METADATA
 							 ORNAME "'.$layer_name.'"
 							 WMS_ENABLE_REQUEST "*"
-							 WMS_SRS  "epsg:'.$proj.'"
-							 WMS_TITLE  "'.$layer_name.' epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:3395"
+							 WMS_SRS  "epsg:'.$proj.' epsg:'.$townsEpsg.' epsg:'.$ll_proj.'"
+							 WMS_TITLE  "'.$layer_name.'"
 							 WMS_INCLUDE_ITEMS "all"
 							 WMS_FEATURE_INFO_MIME_TYPE  "text/html"	
 						   END    
@@ -587,7 +588,7 @@ class ThematizerController extends AppController
 						   METADATA
 						     WMS_ENABLE_REQUEST "*"
 						     ORNAME   "limiti_comunali"
-						     WMS_SRS  "epsg:'.$townsEpsg.' epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:3395"
+						     WMS_SRS  "epsg:'.$proj.' epsg:'.$townsEpsg.' epsg:'.$ll_proj.'"
 						     WMS_TITLE  "limiti_comunali"
 						     WMS_FEATURE_INFO_MIME_TYPE  "text/html"
 						   END    
@@ -669,7 +670,7 @@ class ThematizerController extends AppController
 						   METADATA
 						     WMS_ENABLE_REQUEST "*"
 						     ORNAME   "quadro"
-						     WMS_SRS  "epsg:'.$townsEpsg.' epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:3395"
+						     WMS_SRS  "epsg:'.$proj.' epsg:'.$townsEpsg.' epsg:'.$ll_proj.'"
 						     WMS_TITLE  "quadro"
 						     WMS_FEATURE_INFO_MIME_TYPE  "text/html"
 						   END    

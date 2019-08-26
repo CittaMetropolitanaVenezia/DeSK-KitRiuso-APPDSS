@@ -280,7 +280,8 @@ class ProjectsController extends AppController
 								$conn->execute('DROP TABLE '. $tableName);
 								$success = false;								
 								$msg = 'File shape non valido. Sono accettati solo shape poligonali';
-							}else{															
+							//controllo se la proiezione inserita è coerente con quella delle impostazioni
+							}else if($results[0]['srid'] == $proj){															
 								$project = $this->Projects->newEntity();
 								$project['polygon_table'] = $tableName;
 								$project['name'] = $project_name;
@@ -295,6 +296,10 @@ class ProjectsController extends AppController
 										$conn->execute('DROP TABLE '. $tableName);
 										$msg = 'Errore del server';
 									}								
+							}else{
+								$conn->execute('DROP TABLE '. $tableName);
+								$success = false;								
+								$msg = 'File shape non valido. Sono accettati solo shape in proiezione '.$proj.'';
 							}
 						}else{
 							$msg = 'Impossibile caricare il file di shape. Riprovare più tardi.';
@@ -452,11 +457,14 @@ class ProjectsController extends AppController
 						$res = pg_query($dbi,$query);
 						$success = ($res === FALSE) ? false : true;
 						$conn = ConnectionManager::get('default');				
-						if($success){	
-							$project = $this->Projects->get($project_id, [
-								'contain' => []
-							]);
-							$project['shape_table'] = $tableName;
+						if($success){
+							$table = $conn->execute("SELECT * FROM geometry_columns WHERE f_table_name = '".$tableName."'");
+							$results = $table ->fetchAll('assoc');
+							if($results[0]['srid'] == $proj){
+								$project = $this->Projects->get($project_id, [
+									'contain' => []
+								]);
+								$project['shape_table'] = $tableName;
 								if($this->Projects->save($project)){
 									$msg = 'Shape caricata correttamente!';		
 								}else{													
@@ -468,6 +476,13 @@ class ProjectsController extends AppController
 								$results = $columns ->fetchAll('assoc');
 								$rawType = $conn->execute("SELECT type FROM geometry_columns WHERE f_table_name='".$tableName."'");
 								$type  = $rawType->fetchAll('assoc');
+							}else{
+								$conn->execute('DROP TABLE '. $tableName);
+								$success = false;
+								$results = null;
+								$msg = 'File shape non valido. Sono accettati solo shape in proiezione '.$proj.'';
+							}
+					
 						}else{
 							$msg = 'Impossibile caricare il file di shape. Riprovare più tardi.';
 							$results = null;

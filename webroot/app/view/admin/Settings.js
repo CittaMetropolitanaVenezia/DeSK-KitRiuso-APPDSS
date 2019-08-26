@@ -40,7 +40,7 @@ Ext.define('APPDSS.view.admin.Settings', {
             },
             defaultType: 'textfield',
             items: [
-                { fieldLabel: 'Proiezione',  name: 'displayProj', allowBlank: false, anchor: '70%'},
+                { fieldLabel: 'Proiezione',  name: 'displayProj', allowBlank: false, anchor: '70%', value: 32632, readOnly: true},
                 { fieldLabel: 'Directory funzioni postgis', name: 'sql_shp_path', allowBlank: false, anchor: '70%'},
 				{ fieldLabel: 'x min', name: 'x_min', allowBlank: false, anchor: '70%'},
 				{ fieldLabel: 'y min', name: 'y_min', allowBlank: false, anchor: '70%'},
@@ -52,7 +52,7 @@ Ext.define('APPDSS.view.admin.Settings', {
             style: {
                 marginTop: '5px'
             },
-            title: 'Extent leaflet - EPSG:4326',
+            title: 'Leaflet',
             collapsed: false,
             collapsible: true,
            // allowBlank: false,
@@ -70,9 +70,9 @@ Ext.define('APPDSS.view.admin.Settings', {
             defaultType: 'textfield',
             items: [
 				//{ fieldLabel: 'Proiezione',  name: 'll_displayProj', allowBlank: false, anchor: '70%',readOnly: true},
-		    		{
+				{
 					xtype: 'combobox',
-					fieldLabel: 'Proiezione',
+					fieldLabel: 'Proiezione dati',
 					typeAhead: true,
 					triggerAction: 'all',
 					forceSelection: true,
@@ -80,6 +80,8 @@ Ext.define('APPDSS.view.admin.Settings', {
 					queryMode: 'local',
 					displayField: 'proj',
 					valueField: 'proj',
+					value: 3857,
+					readOnly: true,
 					name: 'll_displayProj',			
 					allowBlank: false,					
 					anchor: '70%',
