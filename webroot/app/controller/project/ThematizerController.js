@@ -171,6 +171,8 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 		var me = this;
         form = this.getView().getForm();		
         panel = this.getView().up();
+		polyForm = panel.down('#polygonform').getForm();
+		values = polyForm.getValues();
         grid = this.getView().down('grid');
         data = form.getValues();
 		projectData = this.getView().up().down('#polygonform').getForm().getValues();
@@ -188,7 +190,9 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
                 url:  App.security.TokenStorage.getUrl()+'thematizer/saveThema',
                 params: {
                     'classifications': Ext.encode(classifications),
-					'project_id': projectData.project_id != '' ? projectData.project_id : me.project_id
+					'project_id': projectData.project_id != '' ? projectData.project_id : me.project_id,
+					'poly_table': values.poly_table,
+					'general_table': values.general_table
                 },
                 success: function(form, action) {
                     panel.unmask();
@@ -257,6 +261,64 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
         grid.getStore().insert(0, r);
         rowEditing.startEdit(0, 0);
     },
+	displayValues: function(){
+		var me = this;
+        panel = me.getView().up();
+        grid = this.getView().down('grid');
+        data = this.getView().getForm().getValues();
+        themacolumn = data.themacolumn;
+		wms_table = data.wms_table;
+		panel.mask('Operazione in corso..');
+            Ext.Ajax.request({
+                url:  App.security.TokenStorage.getUrl()+'thematizer/retrieveValues',
+                method: 'POST',
+                params: {
+                    'themacolumn': themacolumn,
+                    'wms_table' : wms_table
+                },
+                success: function (response) {
+                    panel.unmask();
+                    var values = [];
+                    var result = Ext.decode(response.responseText);
+                    for(i=0; i<result.data.length; i++){
+                        values[i] = result.data[i][themacolumn.toLowerCase()];
+                    }					
+                    values = values.filter( function( item, index, inputArray ) {
+                        return inputArray.indexOf(item) == index;
+                    });
+                    values.sort((a, b) => a - b);  
+					var valueWindow = Ext.create('Ext.window.Window', {
+						title: 'Elenco Valori',
+						height: 250,
+						width: 300,
+						layout: 'fit',
+						items: {  
+							xtype: 'grid',
+							border: false,
+							columns: [{ text: 'Valori - '+values.length+' totali',  dataIndex: 'value',flex: 1,align: 'center', sortable: false}],             
+							store: Ext.create('Ext.data.Store',{
+								fields : ['value'],
+								remoteFilter: false
+							}), 
+						}
+					});
+					classification = [];
+					for(i=0; i<values.length; i++){
+							classification[i] = new Ext.data.Record({
+								id: i,
+								value: values[i] != null ? values[i] : 0
+							});           
+					}
+					valWinStore = valueWindow.down('grid').getStore();
+					valWinStore.add(classification);
+					valueWindow.show();
+                },   
+                failure: function (response) {
+                    panel.unmask();
+                    Ext.Msg.alert('Errore', 'Errore del server');
+                }
+            });
+	},
     classifyDataSwitch: function(){
         data = this.getView().getForm().getValues();
         panel = this.getView().up();

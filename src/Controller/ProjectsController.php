@@ -833,16 +833,21 @@ class ProjectsController extends AppController
 							$rawSqmData = $conn->execute($sqmQuery);
 							$sqmData = $rawSqmData->fetchAll('assoc');
 							$n = count($sqmData);
-							foreach($sqmData as $k => $value){
-								$avg+= $value[$fieldOutput];
+							if($n > 1){
+								foreach($sqmData as $k => $value){
+									$avg+= $value[$fieldOutput];
+								}
+								$avg = ($avg / $n);
+								$sqm = 0;
+								foreach($sqmData as $ke => $valore){
+									$sqm+=pow(($valore[$fieldOutput]-$avg),2);
+								}
+								$sqm = pow(($sqm / ($n-1)),1/2);
+								$result[$key] = array('sqm' => $sqm, 'gid' => $val['gid']);
+							}else{
+								$result[$key] = array('sqm' => 0, 'gid' => $val['gid']);
 							}
-							$avg = ($avg / $n);
-							$sqm = 0;
-							foreach($sqmData as $ke => $valore){
-								$sqm+=pow(($valore[$fieldOutput]-$avg),2);
-							}
-							$sqm = pow(($sqm / ($n-1)),1/2);
-							$result[$key] = array('sqm' => $sqm, 'gid' => $val['gid']);
+							
 						}
 			break;
 			case "Perimetro":
@@ -855,16 +860,21 @@ class ProjectsController extends AppController
 								$rawSqmData = $conn->execute($sqmQuery);
 								$sqmData = $rawSqmData->fetchAll('assoc');
 								$n = count($sqmData);
-								foreach($sqmData as $k => $value){
-									$avg+= $value[$fieldOutput];
+								if($n > 1){
+									foreach($sqmData as $k => $value){
+										$avg+= $value[$fieldOutput];
+									}
+									$avg = ($avg / $n);
+									$sqm = 0;
+									foreach($sqmData as $ke => $valore){
+										$sqm+=pow(($valore[$fieldOutput]-$avg),2);
+									}
+									$sqm = pow(($sqm / ($n-1)),1/2);
+									$result[$key] = array('sqm' => $sqm, 'gid' => $val['gid']);	
+								}else{
+									$result[$key] = array('sqm' => 0, 'gid' => $val['gid']);	
 								}
-								$avg = ($avg / $n);
-								$sqm = 0;
-								foreach($sqmData as $ke => $valore){
-									$sqm+=pow(($valore[$fieldOutput]-$avg),2);
-								}
-								$sqm = pow(($sqm / ($n-1)),1/2);
-								$result[$key] = array('sqm' => $sqm, 'gid' => $val['gid']);
+							
 							}
 			break;
 			case "Lunghezza":
@@ -877,16 +887,21 @@ class ProjectsController extends AppController
 								$rawSqmData = $conn->execute($sqmQuery);
 								$sqmData = $rawSqmData->fetchAll('assoc');
 								$n = count($sqmData);
-								foreach($sqmData as $k => $value){
-									$avg+= $value[$fieldOutput];
+								if($n > 1){
+									foreach($sqmData as $k => $value){
+										$avg+= $value[$fieldOutput];
+									}
+									$avg = ($avg / $n);
+									$sqm = 0;
+									foreach($sqmData as $ke => $valore){
+										$sqm+=pow(($valore[$fieldOutput]-$avg),2);
+									}
+									$sqm = pow(($sqm / ($n-1)),1/2);
+									$result[$key] = array('sqm' => $sqm, 'gid' => $val['gid']);
+								}else{
+									$result[$key] = array('sqm' => 0, 'gid' =>  $val['gid']);
 								}
-								$avg = ($avg / $n);
-								$sqm = 0;
-								foreach($sqmData as $ke => $valore){
-									$sqm+=pow(($valore[$fieldOutput]-$avg),2);
-								}
-								$sqm = pow(($sqm / ($n-1)),1/2);
-								$result[$key] = array('sqm' => $sqm, 'gid' => $val['gid']);
+						
 							}
 			break;
 			default:
@@ -899,16 +914,21 @@ class ProjectsController extends AppController
 						$rawSqmData = $conn->execute($sqmQuery);
 						$sqmData = $rawSqmData->fetchAll('assoc');
 						$n = count($sqmData);
-						foreach($sqmData as $k => $value){
-							$avg+= $value[$fieldOutput];
+						if($n > 1){
+							foreach($sqmData as $k => $value){
+								$avg+= $value[$fieldOutput];
+							}
+							$avg = ($avg / $n);
+							$sqm = 0;
+							foreach($sqmData as $ke => $valore){
+								$sqm+=pow(($valore[$fieldOutput]-$avg),2);
+							}
+							$sqm = pow(($sqm / ($n-1)),1/2);
+							$result[$key] = array('sqm' => $sqm, 'gid' => $val['gid']);
+						}else{
+							$result[$key] = array('sqm' => 0, 'gid' => $val['gid']);
 						}
-						$avg = ($avg / $n);
-						$sqm = 0;
-						foreach($sqmData as $ke => $valore){
-							$sqm+=pow(($valore[$fieldOutput]-$avg),2);
-						}
-						$sqm = pow(($sqm / ($n-1)),1/2);
-						$result[$key] = array('sqm' => $sqm, 'gid' => $val['gid']);
+						
 					}		
 			break;
 		}

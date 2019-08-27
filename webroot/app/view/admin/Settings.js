@@ -40,7 +40,11 @@ Ext.define('APPDSS.view.admin.Settings', {
             },
             defaultType: 'textfield',
             items: [
-                { fieldLabel: 'Proiezione',  name: 'displayProj', allowBlank: false, anchor: '70%', value: 32632, readOnly: true},
+                { fieldLabel: 'Proiezione',  name: 'displayProj', allowBlank: false, anchor: '70%', value: 32632, readOnly: true,
+				autoEl: {
+				  tag: 'div',
+				  'data-qtip': 'La proiezione deve essere coerente con la proiezione degli shape file caricati durante la creazione dei progetti.'
+				}},
                 { fieldLabel: 'Directory funzioni postgis', name: 'sql_shp_path', allowBlank: false, anchor: '70%'},
 				{ fieldLabel: 'x min', name: 'x_min', allowBlank: false, anchor: '70%'},
 				{ fieldLabel: 'y min', name: 'y_min', allowBlank: false, anchor: '70%'},

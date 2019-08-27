@@ -14,7 +14,7 @@ Ext.define('APPDSS.controller.project.NewprojectController', {
 		if(form.isValid()) {
 			form.submit({
             url:  App.security.TokenStorage.getUrl()+'projects/addPolygonShape',
-            waitMsg: 'Caricamento shape in corso...',
+            waitMsg: 'Caricamento shape in corso, l\'operazione potrebbe richiedere qualche minuto...',
 			timeout: 300000,
             params: params,
             success: function(fp, o) {
@@ -55,7 +55,7 @@ Ext.define('APPDSS.controller.project.NewprojectController', {
 			if(form.isValid()){
 				form.submit({
 					url:  App.security.TokenStorage.getUrl()+'projects/addGeneralShape',
-					waitMsg: 'Caricamento shape in corso...',
+					waitMsg: 'Caricamento shape in corso, l\'operazione potrebbe richiedere qualche minuto...',
 					timeout: 300000,
 					params: params,
 					success: function(fp, o) {
@@ -129,10 +129,10 @@ Ext.define('APPDSS.controller.project.NewprojectController', {
 			valid = true;
 		}
 		if(valid){
-			panel.mask('Elaborazione in corso, l\'operazione potrebbe richiedere qualche minuto..');
+			panel.mask('Elaborazione in corso, l\'operazione potrebbe richiedere alcuni minuti..');
 			Ext.Ajax.request({
 			url:  App.security.TokenStorage.getUrl()+'projects/actionSwitch',
-						timeout: 600000,
+						timeout: 800000,
 						method: 'POST',
 						params: {
 							'poly_table': polyValues.poly_table,

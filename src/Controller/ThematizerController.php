@@ -88,45 +88,7 @@ class ThematizerController extends AppController
         ));		
 
     }
-	public function endThematizer(){
-		$this->autoRender = 0;
-		$data = $this->request->getData();
-		$poly_table = $data['poly_table'];
-		$gen_table = $data['general_table'];
-		$project_id = $data['project_id'];
-		$conn = ConnectionManager::get('default');
-		$deletedPoly = true;
-		$deletedGen = true;
-		if($poly_table != ''){
-			$deletedPoly = false;
-			if($conn->execute("DROP TABLE ".$poly_table."")){
-				$deletedPoly = true;
-			}
-			$conn->execute("UPDATE projects SET polygon_table = null WHERE id = ".$project_id."");
-		}
-		if($gen_table != ''){
-			$deletedGen = false;
-			if($conn->execute("DROP TABLE ".$gen_table."")){
-				$deletedGen = true;
-			}
-			$conn->execute("UPDATE projects SET shape_table = null WHERE id = ".$project_id."");
-		}
-		
-		if($deletedPoly && $deletedGen){
-			$success = true;
-			$msg = 'Progetto creato correttamente!';
-			$data = array();
-		}else{
-			$success = false;
-			$msg = 'Errore del Server';
-			$data = array();
-		}
-		echo json_encode(array(
-			'success' => $success,
-			'data' => $data,
-			'message' => $msg
-			));
-	}
+	
 	   public function shapeExport(){
         $this->autoRender = 0;
         $data = $this->request->getData();
@@ -269,6 +231,8 @@ class ThematizerController extends AppController
 		$labelcolumn = $data['labelcolumn'];
 		$labelcolor = $data['label_color'];
 		$layer_name = $data['layer_name'];
+		$poly_table = $data['poly_table'];
+		$gen_table = $data['general_table'];			
 		$this->loadModel('Projects');
 		$Project = $this->Projects->get($project_id, [
             'contain' => []
@@ -290,12 +254,70 @@ class ThematizerController extends AppController
 				$msg = 'Errore del Server.';
 				$data = array();
             }
+			if($success){
+				$conn = ConnectionManager::get('default');
+				$deletedPoly = true;
+				$deletedGen = true;
+				if($poly_table != ''){
+					$deletedPoly = false;
+					if($conn->execute("DROP TABLE IF EXISTS ".$poly_table."")){
+						$deletedPoly = true;
+					}
+					$conn->execute("UPDATE projects SET polygon_table = null WHERE id = ".$project_id."");
+				}
+				if($gen_table != ''){
+					$deletedGen = false;
+					if($conn->execute("DROP TABLE IF EXISTS ".$gen_table."")){
+						$deletedGen = true;
+					}
+					$conn->execute("UPDATE projects SET shape_table = null WHERE id = ".$project_id."");
+				}
+			}
 		echo json_encode(array(
 			'success' => $success,
 			'data' => $data,
 			'message' => $msg
 		));
 	}	
+	public function endThematizer(){
+		$this->autoRender = 0;
+		$data = $this->request->getData();
+		$poly_table = $data['poly_table'];
+		$gen_table = $data['general_table'];
+		$project_id = $data['project_id'];
+		$conn = ConnectionManager::get('default');
+		$deletedPoly = true;
+		$deletedGen = true;
+		if($poly_table != ''){
+			$deletedPoly = false;
+			if($conn->execute("DROP TABLE IF EXISTS ".$poly_table."")){
+				$deletedPoly = true;
+			}
+			$conn->execute("UPDATE projects SET polygon_table = null WHERE id = ".$project_id."");
+		}
+		if($gen_table != ''){
+			$deletedGen = false;
+			if($conn->execute("DROP TABLE IF EXISTS ".$gen_table."")){
+				$deletedGen = true;
+			}
+			$conn->execute("UPDATE projects SET shape_table = null WHERE id = ".$project_id."");
+		}
+		
+		if($deletedPoly && $deletedGen){
+			$success = true;
+			$msg = 'Progetto creato correttamente!';
+			$data = array();
+		}else{
+			$success = false;
+			$msg = 'Errore del Server';
+			$data = array();
+		}
+		echo json_encode(array(
+			'success' => $success,
+			'data' => $data,
+			'message' => $msg
+			));
+	}
     public function generateWms(){
 		$this->autoRender=0;
         $data = $this->request->getData();
@@ -364,7 +386,7 @@ class ThematizerController extends AppController
 			$shapeType = 'LINE';
 		}else if($shapeType == 'MULTIPOINT'){
 			$shapeType = 'POINT';
-		}		
+		}	
 		$queryResult = $conn->execute('SELECT proj4text FROM spatial_ref_sys WHERE auth_srid = '.$proj);
 		$projection = $queryResult ->fetchAll('assoc');
 		
@@ -408,7 +430,7 @@ class ThematizerController extends AppController
 						  MAXSCALEDENOM   1500000
 						  METADATA
 						    WMS_TITLE   "'.strtoupper($projectName).'"
-						    WMS_SRS   "epsg:'.$proj.' epsg:'.$townsEpsg.' epsg:'.$ll_proj.'" 
+						    WMS_SRS   "epsg:'.$proj.' epsg:'.$ll_proj.'" 
 						    WMS_ONLINERESOURCE   "'.$_SERVER['HTTP_ORIGIN'].'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'.map"
 						    WMS_FEATURE_INFO_MIME_TYPE   "text/html"
 						    WMS_ABSTRACT   ""
@@ -510,22 +532,22 @@ class ThematizerController extends AppController
 					$explodedLastValue = explode($lastCondition,$rawValues[1]);
 					$finalLastValue = end($explodedLastValue);
 				}				
-				$expression = "('[".$themacolumn."]' ".$firstCondition." '".$finalFirstValue."' AND '[".$themacolumn."]' ".$lastCondition." '".$finalLastValue."')";				
+				$expression = "(([".$themacolumn."] ".$firstCondition." ".$finalFirstValue.") AND ([".$themacolumn."] ".$lastCondition." ".$finalLastValue."))";				
 			}else if($rawExpression[0] == '<' AND $rawExpression[1] == '='){
 				$rawValue = explode('<=',$rawExpression);
-				$expression = "('[".$themacolumn."]' <= '".end($rawValue)."')";
+				$expression = "([".$themacolumn."] <= ".end($rawValue).")";
 				
 			}else if($rawExpression[0] == '<'){
 				$rawValue = explode('<',$rawExpression);
-				$expression = "('[".$themacolumn."]' < '".end($rawValue)."')";
+				$expression = "([".$themacolumn."] < ".end($rawValue).")";
 				
 			}else if($rawExpression[0] == '>' AND $rawExpression[1] == '='){
 				$rawValue = explode('>=',$rawExpression);
-				$expression = "('[".$themacolumn."]' >= '".end($rawValue)."')";
+				$expression = "([".$themacolumn."] >= ".end($rawValue).")";
 				
 			}else if($rawExpression[0] == '>'){
 				$rawValue = explode('>',$rawExpression);
-				$expression = "('[".$themacolumn."]' > '".end($rawValue)."')";
+				$expression = "([".$themacolumn."] > ".end($rawValue).")";
 			}else if(is_string($rawExpression)){
 				$expression = "('[".$themacolumn."]' = '".$rawExpression."')";
 			}
@@ -553,7 +575,7 @@ class ThematizerController extends AppController
 		$content.='METADATA
 							 ORNAME "'.$layer_name.'"
 							 WMS_ENABLE_REQUEST "*"
-							 WMS_SRS  "epsg:'.$proj.' epsg:'.$townsEpsg.' epsg:'.$ll_proj.'"
+							 WMS_SRS  "epsg:'.$proj.' epsg:'.$ll_proj.'"
 							 WMS_TITLE  "'.$layer_name.'"
 							 WMS_INCLUDE_ITEMS "all"
 							 WMS_FEATURE_INFO_MIME_TYPE  "text/html"	
@@ -588,7 +610,7 @@ class ThematizerController extends AppController
 						   METADATA
 						     WMS_ENABLE_REQUEST "*"
 						     ORNAME   "limiti_comunali"
-						     WMS_SRS  "epsg:'.$proj.' epsg:'.$townsEpsg.' epsg:'.$ll_proj.'"
+						     WMS_SRS  "epsg:'.$proj.' epsg:'.$ll_proj.'"
 						     WMS_TITLE  "limiti_comunali"
 						     WMS_FEATURE_INFO_MIME_TYPE  "text/html"
 						   END    

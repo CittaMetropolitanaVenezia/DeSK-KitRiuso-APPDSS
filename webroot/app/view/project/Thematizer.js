@@ -295,6 +295,12 @@ Ext.define('APPDSS.view.project.Thematizer', {
                 }}
             ],
             tools: [{
+				type: 'search',
+				tooltip: 'Visualizza valori',
+				listeners:{
+					click: 'displayValues'
+				}
+			},{
                 type: 'plus',
                 tooltip: 'Aggiungi classificazione',
                 listeners:{ 
