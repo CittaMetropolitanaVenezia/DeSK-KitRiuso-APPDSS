@@ -63,6 +63,7 @@ Ext.define('APPDSS.controller.project.NewprojectController', {
 						result = o.result;
 						column_names = result.data.columns;
 						type = result.data.type;
+						columnsCombo.getStore().removeAll();
 						columnsCombo.getStore().add([new Ext.data.Record({
 									column_name: 'Conteggio'
 							   })]); 

@@ -133,7 +133,7 @@ class ThematizerController extends AppController
                 }			
             }
 			$zip->close();		
-            $fileUrl= "http://172.16.100.146".$zipname;
+            $fileUrl= $_SERVER['HTTP_ORIGIN'].$zipname;
 			echo json_encode(array(
                 'success' => true,
                 'data' => $fileUrl,
@@ -160,17 +160,10 @@ class ThematizerController extends AppController
 		$ymin = $settings['y_min'];
 		$xmax = $settings['x_max'];
 		$ymax = $settings['y_max'];		
-		$conn = ConnectionManager::get('default');
-		$project = $conn->execute("SELECT * FROM projects WHERE wms_table = '".$wms_table."'");
-		$fetchedProject = $project->fetchAll('assoc')[0];	
-		$project_name = $fetchedProject['name'];
-		$project_desc = $fetchedProject['description'];
-		$desc_title = $fetchedProject['desc_title'];
-		$legend_title = $fetchedProject['legend_title'];		
-		$mapserverUrl = 'http://172.16.100.146/cgi-bin/mapserv?MAP=';
+		$privateIp = $settings['privateIp'];
+		$conn = ConnectionManager::get('default');		
+		$mapserverUrl = $privateIp.'cgi-bin/mapserv?MAP=';
 		$mapfileDir = ROOT.DS.'mapfiles/';
-		$mapfileName = $this->normalizeString($project_name);	
-		$map = $mapfileDir.$mapfileName.'.map';
 			$output = $this->generateMapfile($data);
 			if(!$output){
 				$this->autoRender = 0;
@@ -179,8 +172,16 @@ class ThematizerController extends AppController
 					'msg' => 'Impossibile generare il pdf in questo momento. Controllare che siano inseriti tutti i dati della classificazione.',
 					'data' => array()
 				));
-			}		
+			}
+			$project = $conn->execute("SELECT * FROM projects WHERE wms_table = '".$wms_table."'");
+			$fetchedProject = $project->fetchAll('assoc')[0];	
+			$project_name = $fetchedProject['name'];
+			$project_desc = $fetchedProject['description'];
+			$desc_title = $fetchedProject['desc_title'];
+			$legend_title = $fetchedProject['legend_title'];			
 			$wms_conf = json_decode($fetchedProject['wms_conf'],true);
+			$mapfileName = $this->normalizeString($project_name);	
+			$map = $mapfileDir.$mapfileName.'.map';
 			$layers = $wms_conf['layer_name'].',limiti_comunali';
 			$format = 'image/png';
 			$transparent = true;
@@ -641,13 +642,13 @@ class ThematizerController extends AppController
 		                END
 						WEB
 						  IMAGEPATH   "/var/www/html/tmp/"
-						  IMAGEURL   "http://172.16.100.146/tmp/"
+						  IMAGEURL   "'.$_SERVER['HTTP_ORIGIN'].'/tmp/"
 						  #MINSCALEDENOM   100
 						  MAXSCALEDENOM   1500000
 						  METADATA
 						    WMS_TITLE   "'.strtoupper($projectName).'_QUADRO'.'"
 						    WMS_SRS   "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:3395 epsg:'.$townsEpsg.'"
-						    WMS_ONLINERESOURCE   "http://172.16.100.146/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'_quadro'.'.map"
+						    WMS_ONLINERESOURCE   "'.$_SERVER['HTTP_ORIGIN'].'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'_quadro'.'.map"
 						    WMS_FEATURE_INFO_MIME_TYPE   "text/html"
 						    WMS_ABSTRACT   ""
 						    WMS_INCLUDE_ITEMS "all"
