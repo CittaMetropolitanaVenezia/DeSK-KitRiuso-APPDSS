@@ -66,7 +66,7 @@ class ThematizerController extends AppController
         ));					
     }
     public function retrieveValues(){
-        $this->autoRender=0;
+        //$this->autoRender=0;
         $column = $this->request->getData('themacolumn');
         $table = $this->request->getData('wms_table');
         $conn = ConnectionManager::get('default');											
@@ -81,17 +81,23 @@ class ThematizerController extends AppController
             $msg = 'Errore del Server';
             $data = array();
         }
-        echo json_encode(array(
+		$this->set('response', array(
             'success' => $success,
             'data' => $data,
             'msg' => $msg
-        ));		
+        ));
+        /*echo json_encode(array(
+            'success' => $success,
+            'data' => $data,
+            'msg' => $msg
+        ));	*/	
 
     }
 	
 	   public function shapeExport(){
         $this->autoRender = 0;
         $data = $this->request->getData();
+		$origin = $data['origin'];
         $wms_table = $data['wms_table'];
         $schemadefinition = $this->schema_definition($wms_table, false);
         $tableKeys = array_diff(array_keys($schemadefinition), array('the_geom'));
@@ -133,7 +139,7 @@ class ThematizerController extends AppController
                 }			
             }
 			$zip->close();		
-            $fileUrl= $_SERVER['HTTP_ORIGIN'].$zipname;
+            $fileUrl= $origin.$zipname;
 			echo json_encode(array(
                 'success' => true,
                 'data' => $fileUrl,
@@ -342,6 +348,7 @@ class ThematizerController extends AppController
 		
     }
 	public function generateMapFile($data){
+		$origin = $data['origin'];
 		$mapfileFolder = ROOT.DS.'mapfiles';
 		$project_id = $data['project_id'];
         $classifications = json_decode($data['classifications'],true);
@@ -426,13 +433,13 @@ class ThematizerController extends AppController
 		                END
 						WEB
 						  IMAGEPATH   "/var/www/html/tmp/"
-						  IMAGEURL   "'.$_SERVER['HTTP_ORIGIN'].'/tmp/"
+						  IMAGEURL   "'.$origin.'/tmp/"
 						  #MINSCALEDENOM   100
 						  MAXSCALEDENOM   1500000
 						  METADATA
 						    WMS_TITLE   "'.strtoupper($projectName).'"
 						    WMS_SRS   "epsg:'.$proj.' epsg:'.$ll_proj.'" 
-						    WMS_ONLINERESOURCE   "'.$_SERVER['HTTP_ORIGIN'].'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'.map"
+						    WMS_ONLINERESOURCE   "'.$origin.'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'.map"
 						    WMS_FEATURE_INFO_MIME_TYPE   "text/html"
 						    WMS_ABSTRACT   ""
 						    WMS_INCLUDE_ITEMS "all"
@@ -642,13 +649,13 @@ class ThematizerController extends AppController
 		                END
 						WEB
 						  IMAGEPATH   "/var/www/html/tmp/"
-						  IMAGEURL   "'.$_SERVER['HTTP_ORIGIN'].'/tmp/"
+						  IMAGEURL   "'.$origin.'/tmp/"
 						  #MINSCALEDENOM   100
 						  MAXSCALEDENOM   1500000
 						  METADATA
 						    WMS_TITLE   "'.strtoupper($projectName).'_QUADRO'.'"
 						    WMS_SRS   "epsg:32632 epsg:4326 epsg:900913 epsg:3857 epsg:32633 epsg:3395 epsg:'.$townsEpsg.'"
-						    WMS_ONLINERESOURCE   "'.$_SERVER['HTTP_ORIGIN'].'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'_quadro'.'.map"
+						    WMS_ONLINERESOURCE   "'.$origin.'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'_quadro'.'.map"
 						    WMS_FEATURE_INFO_MIME_TYPE   "text/html"
 						    WMS_ABSTRACT   ""
 						    WMS_INCLUDE_ITEMS "all"
@@ -713,7 +720,7 @@ class ThematizerController extends AppController
 		$projectData['wms_format'] = 'image/png';
 		$projectData['wms_attribution'] = '';
 		$projectData['wms_maxzoom'] = 18;
-		$projectData['wms_endpoint'] = $_SERVER['HTTP_ORIGIN'].'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'.map';
+		$projectData['wms_endpoint'] = $origin.'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'.map';
 		$projectData['wms_conf'] = json_encode(array(
 			'layer_name' => $layer_name,
 			'classifications' => $data['classifications'],

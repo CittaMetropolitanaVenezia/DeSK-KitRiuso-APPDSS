@@ -42,28 +42,11 @@ Ext.define('APPDSS.view.project.Projectlist', {
             xtype: 'actioncolumn',
             listeners: {
                 click: 'switchProjectList'
-            },
-			//flex: 1,
-            items: [{
-                icon: 'resources/images/black-cross.png',
-                tooltip: 'Cancella progetto',
-                itemId: 'admin-projects-delete',
-            },{
-                icon: 'resources/images/map.png',
-                tooltip: 'Visualizza progetto',
-                itemId: 'admin-projects-map',
-            },{
-                icon: 'resources/images/edit.png',
-                tooltip: 'Modifica progetto',
-                itemId: 'admin-projects-edit'
-            },{
-				icon: 'resources/images/colors.png',
-				tooltip: 'Thematizer',
-				itemId: 'admin-projects-thematizer'
-			}]
+            }
         }
     ],
     listeners: {
-        activate: 'loadData'
+        activate: 'loadData',
+		render: 'hideFunctions'
     }
 });

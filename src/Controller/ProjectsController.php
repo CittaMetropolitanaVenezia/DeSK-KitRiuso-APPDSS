@@ -276,24 +276,11 @@ class ProjectsController extends AppController
 							//controllo se la geometria inserita è di tipo POLYGON o MULTIPOLYGON, se non lo è elimino la tabella
 							$table = $conn->execute("SELECT * FROM geometry_columns WHERE f_table_name = '".$tableName."'");
 							$results = $table ->fetchAll('assoc');
-							$validGeometriesQuery = $conn->execute("SELECT ST_isValid(the_geom) as valid FROM ".$tableName."");
-							$validGeometries = $validGeometriesQuery->fetchAll('assoc');
-							$validityCheck = true;
-							foreach($validGeometries as $validity){
-								if($validity['valid'] !== TRUE){
-									$validityCheck = false;
-								}
-							}
 							if($results[0]['type'] != 'MULTIPOLYGON' && $results[0]['type'] !='POLYGON' ){								
 								$conn->execute('DROP TABLE '. $tableName);
 								$success = false;								
 								$msg = 'File shape non valido. Sono accettati solo shape poligonali';
 							
-							}else if($validityCheck === FALSE){
-								$conn->execute('DROP TABLE '.$tableName);
-								$success = false;
-								$msg = 'File shape non valido. Sono state rilevate geometrie non corrette.';
-							//controllo se la proiezione inserita è coerente con quella delle impostazioni
 							}else if($results[0]['srid'] == $proj){															
 								$project = $this->Projects->newEntity();
 								$project['polygon_table'] = $tableName;
@@ -473,19 +460,7 @@ class ProjectsController extends AppController
 						if($success){
 							$table = $conn->execute("SELECT * FROM geometry_columns WHERE f_table_name = '".$tableName."'");
 							$results = $table ->fetchAll('assoc');
-							$validGeometriesQuery = $conn->execute("SELECT ST_isValid(the_geom) as valid FROM ".$tableName."");
-							$validGeometries = $validGeometriesQuery->fetchAll('assoc');
-							$validityCheck = true;
-							foreach($validGeometries as $validity){
-								if($validity['valid'] !== TRUE){
-									$validityCheck = false;
-								}
-							}
-							if($validityCheck === FALSE){
-								$conn->execute('DROP TABLE '.$tableName);
-								$success = false;
-								$msg = 'File shape non valido. Sono state rilevate geometrie non corrette.';
-							}else if($results[0]['srid'] == $proj){
+							if($results[0]['srid'] == $proj){
 								$project = $this->Projects->get($project_id, [
 									'contain' => []
 								]);

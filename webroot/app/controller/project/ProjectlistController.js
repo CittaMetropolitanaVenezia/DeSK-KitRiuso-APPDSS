@@ -62,6 +62,33 @@ Ext.define('APPDSS.controller.project.ProjectlistController', {
         grid = Ext.getCmp('projectgrid');
         grid.getStore().load();
     },
+	hideFunctions: function(){
+		actions = [{
+                icon: 'resources/images/black-cross.png',
+                tooltip: 'Cancella progetto',
+                itemId: 'admin-projects-delete',
+            },{
+                icon: 'resources/images/map.png',
+                tooltip: 'Visualizza progetto',
+                itemId: 'admin-projects-map',
+            },{
+                icon: 'resources/images/edit.png',
+                tooltip: 'Modifica progetto',
+                itemId: 'admin-projects-edit',
+            },{
+				icon: 'resources/images/colors.png',
+				tooltip: 'Thematizer',
+				itemId: 'admin-projects-thematizer'
+			}];	
+		for(i = 0; i < actions.length; i++){
+			if(sessionStorage.getItem('admin') == 'false'){	
+				if(actions[i].itemId == 'admin-projects-delete' || actions[i].itemId == 'admin-projects-edit'){
+					actions[i].hidden = true;
+				}
+			}
+		}			
+		this.getView().down('actioncolumn').items = actions;	
+	},
     viewProject: function(view,rowIndex){
         id = rowIndex;
         //panel = this.getView().up('#projectTab');

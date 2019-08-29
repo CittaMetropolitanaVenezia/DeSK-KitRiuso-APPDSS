@@ -280,8 +280,8 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
                     panel.unmask();
                     var values = [];
                     var result = Ext.decode(response.responseText);
-                    for(i=0; i<result.data.length; i++){
-                        values[i] = result.data[i][themacolumn.toLowerCase()];
+                    for(i=0; i<result.response.data.length; i++){
+                        values[i] = result.response.data[i][themacolumn.toLowerCase()];
                     }					
                     values = values.filter( function( item, index, inputArray ) {
                         return inputArray.indexOf(item) == index;
@@ -355,8 +355,8 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
                     panel.unmask();
                     var values = [];
                     var result = Ext.decode(response.responseText);
-                    for(i=0; i<result.data.length; i++){
-                        values[i] = result.data[i][themacolumn.toLowerCase()];
+                    for(i=0; i<result.response.data.length; i++){
+                        values[i] = result.response.data[i][themacolumn.toLowerCase()];
                     }
 					
                     values = values.filter( function( item, index, inputArray ) {
@@ -431,8 +431,8 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
                     panel.unmask();
                     var values = [];
                     var result = Ext.decode(response.responseText);
-                    for(i=0; i<result.data.length; i++){
-                        values[i] = result.data[i][themacolumn];
+                    for(i=0; i<result.response.data.length; i++){
+                        values[i] = result.response.data[i][themacolumn];
                     }
                     values = values.filter( function( item, index, inputArray ) {
                         return inputArray.indexOf(item) == index;
@@ -480,11 +480,13 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
         panel = this.getView().up();
         form = this.getView().getForm();
 		values = form.getValues();
+		origin = window.location.origin;
         panel.mask('Esportazione..');
 		Ext.Ajax.request({
 			url:  App.security.TokenStorage.getUrl()+'thematizer/shapeExport',
 			params: {
-				wms_table : values.wms_table
+				wms_table : values.wms_table,
+				origin : origin
 			},
             success: function(response) {
                 panel.unmask();
@@ -500,7 +502,8 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
     },
     generateWms: function(){
 		var me = this;
-        form = this.getView().getForm();		
+        form = this.getView().getForm();	
+		origin = window.location.origin;
         panel = this.getView().up();
         grid = this.getView().down('grid');
         data = form.getValues();
@@ -519,7 +522,8 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
                 url:  App.security.TokenStorage.getUrl()+'thematizer/generateWms',
                 params: {
                     'classifications': Ext.encode(classifications),
-					'project_id': projectData.project_id != '' ? projectData.project_id : me.project_id
+					'project_id': projectData.project_id != '' ? projectData.project_id : me.project_id,
+					'origin' : origin
                 },
                 success: function(form, action) {
                     panel.unmask();
@@ -545,6 +549,7 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 		form = this.getView().getForm();
 		panel = this.getView().up();
 		endBtn = this.getView().down('#endBtn');
+		origin = window.location.origin;
 		projectData = this.getView().up().down('#polygonform').getForm().getValues();
 		classifications = [];
         i = 0;
@@ -560,7 +565,8 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
                 url:  App.security.TokenStorage.getUrl()+'thematizer/generatePdf',
                 params: {
                     'classifications': Ext.encode(classifications),
-					'project_id': projectData.project_id != '' ? projectData.project_id : me.project_id
+					'project_id': projectData.project_id != '' ? projectData.project_id : me.project_id,
+					'origin': origin
                 },
                 success: function(form, action) {				
                     panel.unmask();
