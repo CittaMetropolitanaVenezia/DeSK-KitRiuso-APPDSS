@@ -54,6 +54,8 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
                         })]); 
                     }       
                 }
+				labelCombo.getStore().add([new Ext.data.Record({
+					column_name: 'nessuna'})]);
 				//backToProjBtn.hide();
 				backToNewBtn.show();
 				wmsBtn.disable();
@@ -146,11 +148,17 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
                         })]); 
                     }       
                 }
+				labelCombo.getStore().add([new Ext.data.Record({
+					column_name: 'nessuna'})]);
 				form.setValues({
 					themacolumn: themacolumn
 				});
 				labelCombo.setValue(labelcolumn);
-				labelColorPicker.setValue(labelcolor);
+				if(labelcolumn == 'nessuna'){
+					labelColorPicker.disable();
+				}else{
+					labelColorPicker.setValue(labelcolor);
+				}
 				layer_field.setValue(layer_name);
 				numberField.setValue(classifications.length);
 				wmsBtn.enable();
@@ -608,8 +616,7 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 				success: function (response) {
 					var result = Ext.decode(response.responseText);
 					Ext.getStore('Projects').load();
-					createProjectTab = me.getView().up('#create_project_tab').up();
-					createProjectTab.setTitle('Crea Progetto');
+					panel.setTitle('<b>Nuovo progetto</b>');
 					me.getView().up('app-main').down('#projectTab').tab.show();
 					me.getView().up('app-main').down('#adminTab').tab.show();
 					Ext.Msg.alert('Attenzione', result.message);
@@ -623,8 +630,7 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 			});
 		}else{
 			Ext.getStore('Projects').load();
-			createProjectTab = this.getView().up('#create_project_tab').up();
-			createProjectTab.setTitle('Crea Progetto');
+			panel.setTitle('<b>Nuovo progetto</b>');
 			this.getView().up('app-main').down('#projectTab').tab.show();
 			this.getView().up('app-main').down('#adminTab').tab.show();
 			panel.setActiveItem(0);

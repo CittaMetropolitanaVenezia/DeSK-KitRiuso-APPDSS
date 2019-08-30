@@ -20,6 +20,9 @@ Ext.define('APPDSS.view.project.Projectlist', {
     store: {
         type: 'projects'
     },
+	viewConfig: {
+		enableTextSelection: true
+	},
     controller: 'projectlist',
     columns: [
         { text: 'Nome',  dataIndex: 'name', flex: 1},

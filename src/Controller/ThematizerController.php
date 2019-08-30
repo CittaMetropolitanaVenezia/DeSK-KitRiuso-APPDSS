@@ -66,7 +66,6 @@ class ThematizerController extends AppController
         ));					
     }
     public function retrieveValues(){
-        //$this->autoRender=0;
         $column = $this->request->getData('themacolumn');
         $table = $this->request->getData('wms_table');
         $conn = ConnectionManager::get('default');											
@@ -86,12 +85,6 @@ class ThematizerController extends AppController
             'data' => $data,
             'msg' => $msg
         ));
-        /*echo json_encode(array(
-            'success' => $success,
-            'data' => $data,
-            'msg' => $msg
-        ));	*/	
-
     }
 	
 	   public function shapeExport(){
@@ -348,10 +341,10 @@ class ThematizerController extends AppController
 		
     }
 	public function generateMapFile($data){
-		$origin = $data['origin'];
 		$mapfileFolder = ROOT.DS.'mapfiles';
 		$project_id = $data['project_id'];
         $classifications = json_decode($data['classifications'],true);
+		$origin = $data['origin'];
 		$validClass = true;
 		foreach($classifications as $key => $val){
 			if($val['value'] == '' || $val['color'] == '' || $val['legend'] == ''){
@@ -364,8 +357,12 @@ class ThematizerController extends AppController
         $wms_table = $data['wms_table'];
         $themacolumn = $data['themacolumn'];
 		$labelcolumn = $data['labelcolumn'];
-		$labelcolor = $data['label_color'];
-		$finalLabelColor = $this->hexToRgb('#'.$labelcolor);	
+		if($labelcolumn != 'nessuna'){
+					$labelcolor = $data['label_color'];
+					$finalLabelColor = $this->hexToRgb('#'.$labelcolor);
+		}else{
+					$labelcolor = '000000';
+		}			
 		$layer_name = $data['layer_name'];
         $opacity = $data['wms_transp'];		
         $schemadefinition = $this->schema_definition($wms_table, false);
@@ -464,8 +461,13 @@ class ThematizerController extends AppController
 						   	   #SIZE small
 							   #COLOR 0 0 0
 							 #END
-						 #END
-
+						 #END';
+						 
+						 
+						 
+						 
+	if($labelcolumn != 'nessuna'){
+$content.='
 #---------- start layer '.$layer_name.'----------
 
                          LAYER
@@ -477,7 +479,22 @@ class ThematizerController extends AppController
 						   OPACITY '.$opacity.'
 						   LABELITEM   "'.$labelcolumn.'"
 						   CLASSITEM   "'.$themacolumn.'" 
-						   ';						
+						   ';								
+	}else{
+$content.='
+#---------- start layer '.$layer_name.'----------
+
+                         LAYER
+						   NAME   "'.$layer_name.'"
+						   CONNECTION   "user='.$dbconf['username'].' dbname='.$dbconf['database'].' host='.$dbconf['host'].' password='.$dbconf['password'].' port='.$dbconf['port'].'"
+						   CONNECTIONTYPE  postgis
+						   TYPE  '.$shapeType.'
+						   DATA   "'.$geomColumn.' from '.$wms_table.' USING UNIQUE gid"
+						   OPACITY '.$opacity.'
+						   CLASSITEM   "'.$themacolumn.'" 
+						   ';				
+	}					 
+
 		foreach($classifications as $key => $val){
 			
 			$rawExpression = $val['value'];
@@ -559,6 +576,7 @@ class ThematizerController extends AppController
 			}else if(is_string($rawExpression)){
 				$expression = "('[".$themacolumn."]' = '".$rawExpression."')";
 			}
+			if($labelcolumn != 'nessuna'){
 			$class = 'CLASS
 						     NAME "'.$className.'"
 							 EXPRESSION '.$expression.' 
@@ -577,7 +595,20 @@ class ThematizerController extends AppController
 							 END    
 						   END
 						  
-						   ';
+						   ';	
+			}else{
+			$class = 'CLASS
+						     NAME "'.$className.'"
+							 EXPRESSION '.$expression.' 
+							 STYLE
+							   BACKGROUNDCOLOR '.($finalItemColor['r']-1 > 0 ? ($finalItemColor['r']-1) : $finalItemColor['r']).' '.($finalItemColor['g']-1 > 0 ? ($finalItemColor['g']-1) : $finalItemColor['g']).' '.($finalItemColor['b']-1 > 0 ? ($finalItemColor['b']-1) : $finalItemColor['b']).'
+							   COLOR '.$finalItemColor['r'].' '.$finalItemColor['g'].' '.$finalItemColor['b'].'
+							   OUTLINECOLOR  '.($finalItemColor['r']+2 < 255 ? ($finalItemColor['r']+2) : $finalItemColor['r']).' '.($finalItemColor['g']+2 < 255 ? ($finalItemColor['g']+2) : $finalItemColor['g']).' '.($finalItemColor['b']+2 <255 ? ($finalItemColor['b']+2) : $finalItemColor['b']).' 
+							 END  
+						   END
+						  
+						   ';	
+			}			
 		   $content.=$class;
 		}
 		$content.='METADATA

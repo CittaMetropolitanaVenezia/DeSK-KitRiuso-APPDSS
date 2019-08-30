@@ -24,16 +24,14 @@ class ProjectsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function index()
+  public function index()
     {
-		$this->autoRender= 0;
         $projects = $this->paginate($this->Projects);
-        echo json_encode(array(
+		$this->set('response',array(
                 'success' => true,
                 'data' => $projects,
                 'msg' => '',
-            ));
-        //exit;
+            )); 
     }
 
     /**
@@ -273,6 +271,15 @@ class ProjectsController extends AppController
 						$data = array();	
 						$conn = ConnectionManager::get('default');				
 						if($success){
+							foreach($files as $key => $values){
+								$fileshapePath = $tmpFolder.$files[$key]['name'];
+								if(file_exists($fileshapePath)){
+									unlink($fileshapePath);
+								}
+							}
+							if(file_exists($sqlPath)){
+								unlink($sqlPath);
+							}
 							//controllo se la geometria inserita è di tipo POLYGON o MULTIPOLYGON, se non lo è elimino la tabella
 							$table = $conn->execute("SELECT * FROM geometry_columns WHERE f_table_name = '".$tableName."'");
 							$results = $table ->fetchAll('assoc');
@@ -302,6 +309,15 @@ class ProjectsController extends AppController
 								$msg = 'File shape non valido. Sono accettati solo shape in proiezione '.$proj.'';
 							}
 						}else{
+							foreach($files as $key => $values){
+								$fileshapePath = $tmpFolder.$files[$key]['name'];
+								if(file_exists($fileshapePath)){
+									unlink($fileshapePath);
+								}
+							}
+							if(file_exists($sqlPath)){
+								unlink($sqlPath);
+							}
 							$msg = 'Impossibile caricare il file di shape. Riprovare più tardi.';
 						}
 						echo json_encode(array(				
@@ -458,6 +474,15 @@ class ProjectsController extends AppController
 						$success = ($res === FALSE) ? false : true;
 						$conn = ConnectionManager::get('default');				
 						if($success){
+							foreach($files as $key => $values){
+								$fileshapePath = $tmpFolder.$files[$key]['name'];
+								if(file_exists($fileshapePath)){
+									unlink($fileshapePath);
+								}
+							}
+							if(file_exists($sqlPath)){
+								unlink($sqlPath);
+							}
 							$table = $conn->execute("SELECT * FROM geometry_columns WHERE f_table_name = '".$tableName."'");
 							$results = $table ->fetchAll('assoc');
 							if($results[0]['srid'] == $proj){
@@ -484,6 +509,15 @@ class ProjectsController extends AppController
 							}
 					
 						}else{
+							foreach($files as $key => $values){
+								$fileshapePath = $tmpFolder.$files[$key]['name'];
+								if(file_exists($fileshapePath)){
+									unlink($fileshapePath);
+								}
+							}
+							if(file_exists($sqlPath)){
+								unlink($sqlPath);
+							}
 							$msg = 'Impossibile caricare il file di shape. Riprovare più tardi.';
 							$results = null;
 						}

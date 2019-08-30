@@ -158,6 +158,9 @@ Ext.define('APPDSS.view.project.Thematizer', {
             forceSelection: true,
 			allowBlank: false,
             margin: '10 0 10 10',
+			listeners: {
+				select : 'columnSelected'
+			}
       },{
             xtype: 'colorfield',
             columnWidth: 0.3,

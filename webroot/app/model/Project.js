@@ -16,7 +16,7 @@ Ext.define('APPDSS.model.Project', {
         },
         reader: {
             type: 'json',
-            rootProperty: 'data'
+            rootProperty: 'response.data'
         },
     },
     fields: [

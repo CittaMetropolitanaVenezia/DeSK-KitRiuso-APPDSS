@@ -4,4 +4,4 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<?php echo json_encode(compact('result'));?>
+<?php echo json_encode(compact('response'));?>
