@@ -537,7 +537,7 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
                     panel.unmask();
 					result = action.result;
 					endBtn.enable();
-					Ext.Msg.alert('Attenzione',result.msg+'<br><b>Endpoint: </b>'+result.data.endpoint+'<br><b>Layers: </b>'+result.data.layers);
+					Ext.Msg.alert('Attenzione',result.msg+'<br><b>Endpoint: </b>'+result.data.endpoint+'<br><b>Layers: </b>'+result.data.layers).removeCls('x-unselectable');
                 },
                 failure: function(form, action) {
                     panel.unmask();
