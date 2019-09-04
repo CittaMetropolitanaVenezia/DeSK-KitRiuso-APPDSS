@@ -157,6 +157,7 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 				if(labelcolumn == 'nessuna'){
 					labelColorPicker.disable();
 				}else{
+					labelColorPicker.enable();
 					labelColorPicker.setValue(labelcolor);
 				}
 				layer_field.setValue(layer_name);
@@ -602,7 +603,16 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 		var me = this;
 		panel = this.getView().up();
 		mainPanel = this.getView().up('app-main');
+
+		actionsCombo = panel.down('#actioncombo');
+        importBtn = panel.down('#importbutton');
+        columnsCombo = panel.down('#columncombo');
+		generalBtn = panel.down('#shapefield');
+		actionBtn = panel.down('#actionbutton');
 		polyForm = panel.down('#polygonform').getForm();
+		generalForm = panel.down('#shapeform').getForm();
+		console.log(polyForm);
+		console.log(generalForm);
 		values = polyForm.getValues();
 		if(values.general_table != '' || values.poly_table != ''){
 			Ext.Ajax.request({
@@ -616,12 +626,23 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 				success: function (response) {
 					var result = Ext.decode(response.responseText);
 					Ext.getStore('Projects').load();
-					panel.setTitle('<b>Nuovo progetto</b>');
+					panel.setTitle('<b>Nuovo progetto </b>');
+					createProjectTab = me.getView().up('#create_project_tab').up();
+					createProjectTab.setTitle('Crea Progetto');
 					me.getView().up('app-main').down('#projectTab').tab.show();
 					me.getView().up('app-main').down('#adminTab').tab.show();
+					polyForm.reset();
+					generalForm.reset();
 					Ext.Msg.alert('Attenzione', result.message);
 					panel.setActiveItem(0);
 					mainPanel.setActiveItem(0);
+					Ext.getCmp('polygonfield').fileInputEl.set({'multiple' : true});
+					Ext.getCmp('shapefield').fileInputEl.set({'multiple' : true});
+					actionsCombo.hide();
+					columnsCombo.hide();
+					actionBtn.hide();
+					generalBtn.show();
+					importBtn.show();
 				},
 				failure: function (response) {
 					var result = Ext.decode(response.responseText);

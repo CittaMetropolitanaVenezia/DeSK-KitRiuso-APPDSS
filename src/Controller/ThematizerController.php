@@ -209,7 +209,7 @@ class ThematizerController extends AppController
 			foreach($classifications as $key => $value){
 				$val = $value['value'];
 				$color = '#'.$value['color'];
-				$legendValue = $value['legend'];
+				$legendValue = htmlentities($value['legend']);
 				$legend.= '<span style="line-height:10px;background-color:'.$color.';color:'.$color.'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;'.$legendValue.'<br>';
 			}
 			$this->set('legend',$legend);
@@ -229,7 +229,11 @@ class ThematizerController extends AppController
 		$project_id = $data['project_id'];
 		$themacolumn = $data['themacolumn'];
 		$labelcolumn = $data['labelcolumn'];
-		$labelcolor = $data['label_color'];
+		if(isset($data['label_color'])){
+			$labelcolor = $data['label_color'];
+		}else{
+			$labelcolor = '000000';
+		}
 		$layer_name = $data['layer_name'];
 		$poly_table = $data['poly_table'];
 		$gen_table = $data['general_table'];			
