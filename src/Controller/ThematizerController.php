@@ -505,7 +505,9 @@ $content.='
 			$className = $val['legend'];
 			$itemColor = '#'.$val['color'];
 			$finalItemColor = $this->hexToRgb($itemColor);
-			if(is_numeric($rawExpression)){
+			if($rawExpression == 'all'){
+				$expression = "";
+			}else if(is_numeric($rawExpression)){
 				$expression = "('[".$themacolumn."]' = '".$rawExpression."')";
 			}else if(strpos($rawExpression, '|')){
 				$rawValues = explode('|',$rawExpression);
@@ -584,6 +586,25 @@ $content.='
 			$class = 'CLASS
 						     NAME "'.$className.'"
 							 EXPRESSION '.$expression.' 
+							 STYLE
+							   BACKGROUNDCOLOR '.($finalItemColor['r']-1 > 0 ? ($finalItemColor['r']-1) : $finalItemColor['r']).' '.($finalItemColor['g']-1 > 0 ? ($finalItemColor['g']-1) : $finalItemColor['g']).' '.($finalItemColor['b']-1 > 0 ? ($finalItemColor['b']-1) : $finalItemColor['b']).'
+							   COLOR '.$finalItemColor['r'].' '.$finalItemColor['g'].' '.$finalItemColor['b'].'
+							   OUTLINECOLOR  '.($finalItemColor['r']+2 < 255 ? ($finalItemColor['r']+2) : $finalItemColor['r']).' '.($finalItemColor['g']+2 < 255 ? ($finalItemColor['g']+2) : $finalItemColor['g']).' '.($finalItemColor['b']+2 <255 ? ($finalItemColor['b']+2) : $finalItemColor['b']).' 
+							 END
+							 LABEL
+							   COLOR  '.$finalLabelColor['r'].' '.$finalLabelColor['g'].' '.$finalLabelColor['b'].' 
+							   FONT   "arial"
+							   #OUTLINECOLOR '.($finalLabelColor['r']+2 < 255 ? ($finalLabelColor['r']+2) : $finalLabelColor['r']).' '.($finalLabelColor['g']+2 < 255 ? ($finalLabelColor['g']+2) : $finalLabelColor['g']).' '.($finalLabelColor['b']+2 <255 ? ($finalLabelColor['b']+2) : $finalLabelColor['b']).'
+							   ##POSITION  cc
+							   SIZE  10
+							   TYPE  truetype
+							 END    
+						   END
+						  
+						   ';	
+			}else if($rawExpression == 'all'){
+			$class = 'CLASS
+						     NAME "'.$className.'"
 							 STYLE
 							   BACKGROUNDCOLOR '.($finalItemColor['r']-1 > 0 ? ($finalItemColor['r']-1) : $finalItemColor['r']).' '.($finalItemColor['g']-1 > 0 ? ($finalItemColor['g']-1) : $finalItemColor['g']).' '.($finalItemColor['b']-1 > 0 ? ($finalItemColor['b']-1) : $finalItemColor['b']).'
 							   COLOR '.$finalItemColor['r'].' '.$finalItemColor['g'].' '.$finalItemColor['b'].'
