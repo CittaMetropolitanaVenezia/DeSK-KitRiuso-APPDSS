@@ -626,7 +626,7 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 				success: function (response) {
 					var result = Ext.decode(response.responseText);
 					Ext.getStore('Projects').load();
-					panel.setTitle('<b>Nuovo progetto </b>');
+					panel.up().setTitle('<b>Nuovo progetto </b>');
 					createProjectTab = me.getView().up('#create_project_tab').up();
 					createProjectTab.setTitle('Crea Progetto');
 					me.getView().up('app-main').down('#projectTab').tab.show();
@@ -651,7 +651,7 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 			});
 		}else{
 			Ext.getStore('Projects').load();
-			panel.setTitle('<b>Nuovo progetto</b>');
+			panel.up().setTitle('<b>Nuovo progetto</b>');
 			this.getView().up('app-main').down('#projectTab').tab.show();
 			this.getView().up('app-main').down('#adminTab').tab.show();
 			panel.setActiveItem(0);
