@@ -281,7 +281,7 @@ Ext.define('APPDSS.view.project.Thematizer', {
                     flex: 1            
                 },
                 renderer: function(value, metaData,record){
-                    metaData.tdAttr = 'data-qtip="1|2|5 --> x = 1 o x = 2 o x = 5 <br> 1,2 --> 1 <= x <= 2 <br> 1,<2 --> 1 <= x < 2 <br> >1,<2 --> 1 < x < 2 <br> >1,2 --> 1 < x <= 2 <br> 1 --> x = 1 <br> <1 --> x < 1 <br> <= 1 --> x <= 1 <br> >1 --> x > 1 <br> >=1 --> x >= 1"';
+                    metaData.tdAttr = 'data-qtip="1|2|5 --> x = 1 o x = 2 o x = 5 <br> 1,2 --> 1 <= x <= 2 <br> 1,<2 --> 1 <= x < 2 <br> >1,<2 --> 1 < x < 2 <br> >1,2 --> 1 < x <= 2 <br> 1 --> x = 1 <br> <1 --> x < 1 <br> <= 1 --> x <= 1 <br> >1 --> x > 1 <br> >=1 --> x >= 1 <br> all --> tutte"'"';
                     return value;
                 }
                 },
