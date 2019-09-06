@@ -383,9 +383,9 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 							hexColor = "rgb("+palette[i][0]+","+palette[i][1]+","+palette[i][2]+")";
 							classification[i] = new Ext.data.Record({
 								id: i,
-								value: values[i],
+								value: values[i] != null ? values[i] : 0,
 								color: me.parseColor(hexColor)['hex'],
-								legend: values[i]
+								legend: values[i] != null ? values[i] : 0
 							});           
 						}
 					}else{
