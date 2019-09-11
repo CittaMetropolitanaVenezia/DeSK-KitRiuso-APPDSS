@@ -383,9 +383,9 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 							hexColor = "rgb("+palette[i][0]+","+palette[i][1]+","+palette[i][2]+")";
 							classification[i] = new Ext.data.Record({
 								id: i,
-								value: values[i] != null ? values[i] : 0,
+								value: values[i] != null ? values[i] : '0',
 								color: me.parseColor(hexColor)['hex'],
-								legend: values[i] != null ? values[i] : 0
+								legend: values[i] != null ? values[i] : '0'
 							});           
 						}
 					}else{
@@ -611,8 +611,6 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 		actionBtn = panel.down('#actionbutton');
 		polyForm = panel.down('#polygonform').getForm();
 		generalForm = panel.down('#shapeform').getForm();
-		console.log(polyForm);
-		console.log(generalForm);
 		values = polyForm.getValues();
 		if(values.general_table != '' || values.poly_table != ''){
 			Ext.Ajax.request({
