@@ -26,7 +26,7 @@ Applicativo atto alla realizzazione di mappe cartografiche tematiche.
     ```
 5. Aprire il file *app.php* all'interno della cartella config e configurare la connessione al DB (Datasources -> default);
 6. Popolare la tabella 'limiti_comunali' del DB con i dati delle città desiderate;
-7. Aprire il file *settings.ini* all'interno della cartella *config* e modificare la variabile *privateIp* con l'indirizzo IP privato del vostro server.
+7. Aprire il file *config.ini* all'interno della cartella *config* e modificare la variabile *privateIp* con l'indirizzo IP privato del vostro server.
 ## Utilizzo
 1. Accedere all'applicativo tramite l'url del server / appdss:
     ```
