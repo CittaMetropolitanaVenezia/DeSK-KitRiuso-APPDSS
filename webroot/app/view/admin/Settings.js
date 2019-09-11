@@ -49,7 +49,8 @@ Ext.define('APPDSS.view.admin.Settings', {
 				{ fieldLabel: 'x min', name: 'x_min', allowBlank: false, anchor: '70%'},
 				{ fieldLabel: 'y min', name: 'y_min', allowBlank: false, anchor: '70%'},
 				{ fieldLabel: 'x max', name: 'x_max', allowBlank: false, anchor: '70%'},
-				{ fieldLabel: 'y max', name: 'y_max', allowBlank: false, anchor: '70%'}
+				{ fieldLabel: 'y max', name: 'y_max', allowBlank: false, anchor: '70%'},
+				{ xtype:'hiddenfield', name: 'privateIp'							  }
             ]
         },{
             xtype: 'fieldset',

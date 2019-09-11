@@ -26,11 +26,14 @@ class ConfigurationController extends AppController
     {   
         $this->autoRender = 0;
         $myFile = CONFIG."settings.ini";
-        $settings = parse_ini_file($myFile,true);    
+        $settings = parse_ini_file($myFile,true);
+		$ipFile = CONFIG."config.ini";
+		$privateIp = parse_ini_file($ipFile,true)['privateIp'];
         if($settings && count($settings)>0){
             foreach($settings as $key => $val){
                 $data[$key] = $val;
             }
+			$data['privateIp'] = $privateIp;
             $success = true;
             $msg = 'Impostazioni caricate correttamente';
         }else{
@@ -43,7 +46,6 @@ class ConfigurationController extends AppController
             'data' => $data,
             'msg' => $msg
         ));
-        die();
     }
 
     /**
