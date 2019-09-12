@@ -789,6 +789,7 @@ $content.='
 			'user_id' => $this->Auth->User('id'),
 			'classifications' => $data['classifications'],
 			'themacolumn' => $themacolumn,
+			'wms_transp' => $data['wms_transp'],
 			'labelcolumn' => $labelcolumn,
 			'labelcolor' => $labelcolor));
             $Project = $this->Projects->patchEntity($Project, $projectData);
