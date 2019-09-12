@@ -80,13 +80,13 @@ Ext.define('APPDSS.controller.project.ProjectlistController', {
 				tooltip: 'Thematizer',
 				itemId: 'admin-projects-thematizer'
 			}];	
-		for(i = 0; i < actions.length; i++){
+		/*for(i = 0; i < actions.length; i++){
 			if(sessionStorage.getItem('admin') == 'false'){	
 				if(actions[i].itemId == 'admin-projects-delete' || actions[i].itemId == 'admin-projects-edit'){
 					actions[i].hidden = true;
 				}
 			}
-		}			
+		}*/			
 		this.getView().down('actioncolumn').items = actions;	
 	},
     viewProject: function(view,rowIndex){

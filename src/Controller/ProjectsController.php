@@ -25,8 +25,21 @@ class ProjectsController extends AppController
      * @return \Cake\Http\Response|null
      */
   public function index()
-    {
-        $projects = $this->paginate($this->Projects);
+      {
+		if($this->Auth->User('is_admin')){
+			$projects = $this->paginate($this->Projects);
+		}else{
+			$conn = ConnectionManager::get('default');
+			$projects = $conn
+                    ->newQuery()
+                    ->select('*')
+                    ->from('projects')
+					->where(['user_id =' => $this->Auth->User('id')])
+                    ->execute()
+                    ->fetchAll('assoc');
+
+		}
+        
 		$this->set('response',array(
                 'success' => true,
                 'data' => $projects,
@@ -96,7 +109,9 @@ class ProjectsController extends AppController
         $project = $this->Projects->get($data['id'], [
             'contain' => []
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
+		$user_id = json_decode($project['wms_conf'],true)['user_id'];		
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			if($this->Auth->User('is_admin') || $this->Auth->User('id') == $user_id){
             $project = $this->Projects->patchEntity($project, $data);
             if ($this->Projects->save($project)) {
                 $success = true;
@@ -113,6 +128,14 @@ class ProjectsController extends AppController
                 'data' => $output,
                 'msg' => $msg
             ));
+		}else{
+			echo json_encode(array(
+                'success' => false,
+                'data' => '',
+                'msg' => 'Non ti è permesso modificare questo progetto.'
+            ));
+		}
+    
             //exit;
         }
     }
@@ -136,33 +159,41 @@ class ProjectsController extends AppController
             return;
         }*/
         $project = $this->Projects->get($id);
-		$filesName = $this->normalizeString($project['name']);		
-		$wms_table = $project['wms_table'];
-		if($wms_table != ''){
-			$conn = ConnectionManager::get('default');	
-			$conn ->execute("DROP TABLE IF EXISTS ".$wms_table."");
+		$user_id = json_decode($project['wms_conf'],true)['user_id'];
+		if($this->Auth->User('is_admin') || $this->Auth->User('id') == $user_id){
+			$filesName = $this->normalizeString($project['name']);		
+			$wms_table = $project['wms_table'];
+			if($wms_table != ''){
+				$conn = ConnectionManager::get('default');	
+				$conn ->execute("DROP TABLE IF EXISTS ".$wms_table."");
+			}
+			if ($this->Projects->delete($project)) {
+				$mapFile = ROOT.'/mapfiles/'.$filesName.'.map';
+				$mapquadroFile = ROOT.'/mapfiles/'.$filesName.'_quadro.map';
+				$pdfFile = WWW_ROOT.$filesName.'.pdf';
+				if(file_exists($mapFile)){
+					unlink($mapFile);
+				}
+				if(file_exists($mapquadroFile)){
+					unlink($mapquadroFile);
+				}
+				if(file_exists($pdfFile)){
+					unlink($pdfFile);
+				}
+				$success = true;           
+			} else {
+				$success = false;
+			}
+			echo json_encode(array(
+				'success' => $success,
+				'data' => array(),
+				'msg' => ''));
+		}else{
+			echo json_encode(array(
+				'success' => false,
+				'data' => array(),
+				'msg' => 'Non ti è permesso cancellare questo progetto.'));
 		}
-        if ($this->Projects->delete($project)) {
-			$mapFile = ROOT.'/mapfiles/'.$filesName.'.map';
-			$mapquadroFile = ROOT.'/mapfiles/'.$filesName.'_quadro.map';
-			$pdfFile = WWW_ROOT.$filesName.'.pdf';
-			if(file_exists($mapFile)){
-				unlink($mapFile);
-			}
-			if(file_exists($mapquadroFile)){
-				unlink($mapquadroFile);
-			}
-			if(file_exists($pdfFile)){
-				unlink($pdfFile);
-			}
-            $success = true;           
-        } else {
-            $success = false;
-        }
-        echo json_encode(array(
-			'success' => $success,
-			'data' => array(),
-			'msg' => ''));
     }
     public function addPolygonShape(){
 		$this->autoRender = 0;
@@ -292,6 +323,7 @@ class ProjectsController extends AppController
 								$project = $this->Projects->newEntity();
 								$project['polygon_table'] = $tableName;
 								$project['name'] = $project_name;
+								$project['user_id'] = $this->Auth->User('id');
 								$project['description'] = $project_desc;
 								$project['desc_title'] = $desc_title;
 								$project['legend_title'] = $legend_title;

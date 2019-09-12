@@ -47,6 +47,7 @@ class ThematizerController extends AppController
 				'themacol' => $wms_conf['themacolumn'],
 				'labelcol' => $wms_conf['labelcolumn'],
 				'layername' => $wms_conf['layer_name'],
+				'wms_transp' => $wms_conf['wms_transp'],
 				'labelcolor' => $wms_conf['labelcolor']);
 			}else{
 				$success = true;
@@ -94,6 +95,9 @@ class ThematizerController extends AppController
         $wms_table = $data['wms_table'];
         $schemadefinition = $this->schema_definition($wms_table, false);
         $tableKeys = array_diff(array_keys($schemadefinition), array('the_geom'));
+		foreach($tableKeys as $num => $val){
+			$tableKeys[$num] = '"'.$val.'"';
+		}
         $implodedKeys = implode(',',$tableKeys);
         $conn = ConnectionManager::get('default');
         $results = $conn
@@ -229,6 +233,7 @@ class ThematizerController extends AppController
 		$project_id = $data['project_id'];
 		$themacolumn = $data['themacolumn'];
 		$labelcolumn = $data['labelcolumn'];
+		$opacity = $data['wms_transp'];
 		if(isset($data['label_color'])){
 			$labelcolor = $data['label_color'];
 		}else{
@@ -243,9 +248,11 @@ class ThematizerController extends AppController
         ]);
 		$projectData['wms_conf'] = json_encode(array(
 			'layer_name' => $layer_name,
+			'user_id' => $this->Auth->User('id'),
 			'classifications' => $data['classifications'],
 			'themacolumn' => $themacolumn,
 			'labelcolumn' => $labelcolumn,
+			'wms_transp' => $opacity,
 			'labelcolor' => $labelcolor));
             $Project = $this->Projects->patchEntity($Project, $projectData);
 			$msg = '';
@@ -779,6 +786,7 @@ $content.='
 		$projectData['wms_endpoint'] = $origin.'/cgi-bin/mapserv?map='.$mapfileFolder.DS.$projectName.'.map';
 		$projectData['wms_conf'] = json_encode(array(
 			'layer_name' => $layer_name,
+			'user_id' => $this->Auth->User('id'),
 			'classifications' => $data['classifications'],
 			'themacolumn' => $themacolumn,
 			'labelcolumn' => $labelcolumn,

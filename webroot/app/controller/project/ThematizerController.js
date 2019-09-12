@@ -105,6 +105,7 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 		endColorPicker = this.getView().down('#end_color');
 		labelCombo.getStore().removeAll();
 		layer_field = this.getView().down('#layer_name');
+		opacitySlider = this.getView().down('#wms_transp');
         form = this.getView().getForm();
         form.setValues({
             wms_table : wms_table
@@ -125,6 +126,7 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 				themacolumn = result.data.themacol;
 				labelcolor = result.data.labelcolor;
 				layer_name = result.data.layername;
+				wms_transp = result.data.wms_transp;
 				classification = [];
 				for(i=0; i<classifications.length; i++){
 					if(i == 0){
@@ -153,6 +155,7 @@ Ext.define('APPDSS.controller.project.ThematizerController', {
 				form.setValues({
 					themacolumn: themacolumn
 				});
+				opacitySlider.setValue(wms_transp);
 				labelCombo.setValue(labelcolumn);
 				if(labelcolumn == 'nessuna'){
 					labelColorPicker.disable();

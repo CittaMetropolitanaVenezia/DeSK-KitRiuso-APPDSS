@@ -132,10 +132,11 @@ Ext.define('APPDSS.view.project.Thematizer', {
                 }
             }        
       },{
-          fieldLabel: 'Trasparenza del layer',
+          fieldLabel: 'Opacità del layer',
           columnWidth: 0.3,
           labelAlign: 'top',
           name: 'wms_transp',
+		  id: 'wms_transp',
           xtype: 'slider',
           margin: '10 0 10 10',
           maxWidth: 200,
