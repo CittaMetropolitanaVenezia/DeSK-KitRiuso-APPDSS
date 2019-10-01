@@ -1,0 +1,74 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+name: AppDSS
+applicationSuite: Progetto DeSK
+url: 'https://github.com/ProgettoDeSK/KitRiuso-APPDSS'
+landingURL: 'https://github.com/ProgettoDeSK/KitRiuso-APPDSS.git'
+releaseDate: '2019-08-05'
+softwareVersion: '1.0'
+developmentStatus: stable
+softwareType: standalone/web
+platforms:
+  - linux
+  - web
+logo: 'https://progettodesk.it/wp-content/uploads/2018/11/logo_header2.fw_.png'
+categories:
+  - data-collection
+  - data-analytics
+  - data-visualization
+  - collaboration
+  - geographic-information-systems
+  - knowledge-management
+maintenance:
+  type: contract
+  contacts:
+    - name: Luca Celeghin
+      email: informatica@cittametropolitana.ve.it
+      phone: 0412501953
+  contractors:
+    - name: Corvallis S.p.A.
+      website: www.corvallis.it
+      until: '2020-09-30'
+legal:
+  license: GPL-3.0-only
+  mainCopyrightOwner: Città metropolitana di Venezia
+  repoOwner: ProgettoDeSK
+intendedAudience:
+  countries:
+    - it
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - it
+it:
+  riuso:
+    codiceIPA: p_ve
+  conforme:
+    misureMinimeSicurezza: true
+    gdpr: true
+    modelloInteroperabilita: true
+description:
+  it:
+    shortDescription: Sistema di generazione automatica di carte territoriali  tematiche
+    longDescription: >
+      AppDSS permette  di realizzare mappe tematiche di indicatori territoriali
+      e dati socio-economici, mettendo in relazione grandezze differenti ed
+      ottenendo dei quadri geografici rappresentativi esportabili con i
+      protocolli WMS o producendo mappe in formato pdf, per leggere, studiare e
+      capire il territorio: il sistema di rappresentazione statica delle mappe
+      tematiche previsto nella fase di riuso viene quindi evoluto in un sistema
+      dinamico in grado di rappresentare via web le informazioni sempre
+      aggiornate del territorio analizzato.
+
+
+      ​
+    localisedName: AppDSS
+    genericName: AppDSS
+    documentation: 'https://github.com/ProgettoDeSK/KitRiuso-APPDSS.git'
+    features:
+      - Sistema generazione automatica di carte territoriali  tematiche
+    videos:
+      - ' https://progettodesk.it/formazione-appdss-evoluzione/'
