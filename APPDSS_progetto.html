@@ -1,0 +1,86 @@
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<table>
+<tbody>
+<tr>
+<td width="253">
+<h1>&nbsp;</h1>
+<h1>&nbsp;<strong>APPDSS</strong><br /> </h1>
+</td>
+<td width="267">
+<h1><strong>&nbsp;Guida alla creazione di un progetto</strong></h1>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><br /> </p>
+<p>&nbsp;<br /> </p>
+<p><a name="_Toc81971775"></a><a name="_Toc77746299"></a><a name="_Toc465074998"></a><a name="_Toc461328694"></a>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h1>&nbsp;</h1>
+<p>Sommario</p>
+<p><a href="#_Toc16069555">1 INTRODUZIONE. 3</a></p>
+<p><a href="#_Toc16069556">2 PRE-REQUISITI 3</a></p>
+<p><a href="#_Toc16069557">3 CREAZIONE DI UN PROGETTO.. 3</a></p>
+<p><a href="#_Toc16069558">3.1 Creare il nuovo progetto &ndash; Importazione dei dati 3</a></p>
+<p><a href="#_Toc16069559">3.2 Creare il nuovo progetto &ndash; Elaborazione. 3</a></p>
+<p><a href="#_Toc16069560">3.3 Creare il nuovo progetto &ndash; Thematizer. 3</a></p>
+<p>&nbsp;</p>
+<p><strong><br /> </strong></p>
+<h1><a name="_Toc15896602"></a>&nbsp;</h1>
+<h1><a name="_Toc16069555"></a>1 INTRODUZIONE</h1>
+<p>Questa guida seguir&agrave; la creazione di un progetto atto alla creazione di un servizio WMS e un PDF illustrativo riguardo alla popolazione media per ogni comune della C.M. Venezia.</p>
+<p>&nbsp;</p>
+<h1><a name="_Toc16069556"></a>2 PRE-REQUISITI</h1>
+<ul>
+<li>Installazione di APPDSS funzionante;</li>
+<li>Uno shape file contenente i dati geometrici dei comuni di Venezia;</li>
+<li>Uno shape file contenente i dati geometrici delle sezioni di censimento del Veneto;</li>
+<li>Impostazioni del Mapfile corrette rispetto allo shape file che verr&agrave; inserito per primo (nel nostro caso i limiti comunali)</li>
+</ul>
+<p>&nbsp;</p>
+<h1><a name="_Toc16069557"></a>3 CREAZIONE DI UN PROGETTO</h1>
+<p>&nbsp;</p>
+<h2><a name="_Toc16069558"></a>3.1 Creare il nuovo progetto &ndash; Importazione dei dati</h2>
+<p>&nbsp;</p>
+<p>Per creare il nuovo progetto, eseguire il login con un qualsiasi utente e, verificato che le impostazioni riguardanti il mapfile siano corrette, navigare alla scheda &lsquo;Crea Progetto&rsquo;.</p>
+<p>Compilare i campi richiesti, nel nosto caso:</p>
+<p><strong>Nome progetto</strong>: Popolazione media C.M.Venezia</p>
+<p><strong>Titolo legenda</strong>: Popolazione media</p>
+<p><strong>Titolo descrizione</strong>: Popolazione media &ndash; C.M. Venezia</p>
+<p><strong>Descrizione</strong>: Questo progetto &egrave; atto alla visualizzazione della popolazione media per ogni comune della C.M. di Venezia, avendo ricavato i dati dalle sezioni di censimento del Veneto</p>
+<p>&nbsp;</p>
+<p>Una volta compilati i campi, importare lo shape file dei limiti comunali tramite il pulsante &lsquo;Carica&rsquo; e premere &lsquo;Importa&rsquo;.</p>
+<p>Si visualizzer&agrave; un&rsquo;altra schermata di importazione, qua andremo a caricare lo shape file delle sezioni di censimento grazie al pulsante &lsquo;Carica&rsquo;, per poi premere &lsquo;Importa&rsquo;.</p>
+<p>&nbsp;</p>
+<h2><a name="_Toc16069559"></a>3.2 Creare il nuovo progetto &ndash; Elaborazione</h2>
+<p>&nbsp;</p>
+<p>Una volta importato il secondo shape file, si visualizzer&agrave; una schermata avente due men&ugrave; a cascata. Nel primo sono contenuti tutti i campi della tabella generata dal secondo shape, pi&ugrave; certe operazioni definite in base al tipo di geometria dei dati nella tabella. Il campo selezionato &egrave; quello che si andr&agrave; poi a classificare. Nel nostro caso sceglieremo il campo &lsquo;p1&rsquo;.</p>
+<p>Nel secondo men&ugrave; sono contenute tutte le operazioni possibili per quel campo, nel nostro caso, dato lo scopo di classificare la popolazione, sceglieremo l&rsquo;azione &lsquo;Media&rsquo;, quindi premeremo &lsquo;Esegui&rsquo;.</p>
+<p>&nbsp;</p>
+<h2><a name="_Toc16069560"></a>3.3 Creare il nuovo progetto &ndash; Thematizer</h2>
+<p>&nbsp;</p>
+<p>Finito il processo di elaborazione, si visualizzer&agrave; la schermata del thematizer.</p>
+<p>Al campo &lsquo;tabella&rsquo; e &lsquo;colonna classificazione&rsquo; sono rispettivamente indicati il nome della tabella e del campo su cui avverr&agrave; la classificazione. Essi sono compilati automaticamente in seguito all&rsquo;elaborazione dei dati. Il Numero di raggruppamenti &egrave; il numero di classificazioni per i valori del campo, se lasciato vuoto il thematizer prover&agrave; ad eseguire una classificazione per singolo valore, se il numero di valori supera il 20, il thematizer eseguir&agrave; invece una classificazione generale, creando 20 classificazioni assenti da valore. Superare le 20 classificazioni causa problemi con la generazione del PDF. Nel nostro caso, di esempio, metteremo solo 3 classificazioni.</p>
+<p>Colore iniziale e colore finale rappresentano rispettivamente il colore iniziale e finale della palette di colori che si generer&agrave; con la classificazione. Nel nostro caso inseriremo il giallo come colore iniziale, mentre il rosso come colore finale.</p>
+<p>La trasparenza del layer &egrave; la percentuale di opacit&agrave; che verr&agrave; assegnata al servizio WMS.</p>
+<p>La colonna label &egrave; il campo della tabella contenente i valori per le label del servizio WMS.</p>
+<p>Il colore label &egrave; il colore assegnato alle label del servizio WMS.</p>
+<p>Il nome layer &egrave; il nome assegnato al layer contenente la nostra classificazione.</p>
+<p>Nel nostro caso avremo come trasparenza il 30%, come&nbsp; colonna label il campo &lsquo;name&rsquo;, come colore della label il colore nero e come nome del layer &lsquo;pop_media&rsquo;.</p>
+<p>Una volta compilati i dati, premendo classifica si otterr&agrave; la classificazione desiderata.</p>
+<p>Nella tabella, il campo Valore corrisponde al valore/range di valore a cui assegnare il colore, mentre il campo Legenda conterr&agrave; il testo corrispondente a quel colore nella legenda.</p>
+<p>Nel nostro caso avremo come primo valore &ldquo;&lt;100000&rdquo; e come prima legenda &lsquo;Minore di 100.000&rsquo;,</p>
+<p>come secondo valore &ldquo;&gt;100000,&lt;200000&rdquo; e come seconda legenda &lsquo;Tra 100.000 e 200.000&rsquo; e infine, come terzo valore, &ldquo;&gt;200000&rdquo; e ,come terza legenda, &lsquo;Maggiore di 200.000&rsquo;.</p>
+<p>Posizionandosi sopra alla colonna Valore si vedranno, grazie ad un tooltip, tutte le combinazioni possibili per creare range di valori specifici.</p>
+<p>Una volta conclusa la classificazione, Premere il pulsante &lsquo;Genera WMS&rsquo;, che sbloccher&agrave; il pulsante &lsquo;Fine&rsquo; con cui si concluder&agrave; la creazione del progetto.</p>
+<p>E&rsquo; possibile visualizzare il servizio WMS grazie al tasto &lsquo;Visualizza&rsquo; (icona della mappa) nella griglia dei progetti, mentre &egrave; possibile modificarlo grazie al tasto &lsquo;Modifica&rsquo;.</p>
+<p>Per modificare la classificazione, baster&agrave; premere il pulsante &lsquo;Thematizer&rsquo;, l&rsquo;ultimo della griglia.</p>
+<p>Nella schermata del Thematizer &egrave; possibile sia esportare in shape la tabella creata, grazie al pulsante &lsquo;Esporta in shape&rsquo;, sia generare il PDF riguardante il servizio WMS, grazie al bottone &lsquo;genera PDF&rsquo;.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

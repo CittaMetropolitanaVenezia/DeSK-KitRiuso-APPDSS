@@ -1,0 +1,123 @@
+<h1>&nbsp;APPDSS</h1>
+<p>&nbsp;</p>
+<p><br /> </p>
+<p>&nbsp;<br /> </p>
+<p><a name="_Toc81971775"></a><a name="_Toc77746299"></a><a name="_Toc465074998"></a><a name="_Toc461328694"></a>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h1>&nbsp;</h1>
+<p>Sommario</p>
+<p><a href="#_Toc15973614">1 INTRODUZIONE. 3</a></p>
+<p><a href="#_Toc15973615">2 TERMINOLOGIA E DEFINIZIONI 3</a></p>
+<p><a href="#_Toc15973616">3 PREREQUISITI 3</a></p>
+<p><a href="#_Toc15973617">3.1 Infrastruttura. 3</a></p>
+<p><a href="#_Toc15973618">3.2 Kit di riuso.. 3</a></p>
+<p><a href="#_Toc15973619">3.3 Pre-requisiti, vincoli e criticit&agrave;.. 3</a></p>
+<p><a href="#_Toc15973620">4 CONFIGURAZIONE. 4</a></p>
+<p><a href="#_Toc15973621">4.1 Configurazione del sistema.. 4</a></p>
+<p><a href="#_Toc15973622">4.2 Configurazione elementi grafici 4</a></p>
+<p><a href="#_Toc15973623">5 Installazione. 4</a></p>
+<p><a href="#_Toc15973624">6 Creazione di un progetto.. 4</a></p>
+<p>&nbsp;</p>
+<p><strong><br /> </strong></p>
+<h1><a name="_Toc15973614"></a>1 INTRODUZIONE</h1>
+<p>&nbsp;</p>
+<p>Il presente documento vuole fornire le informazioni necessarie per l&rsquo;installazione la configurazione e la parametrizzazione dell&rsquo;applicativo APPDSS.</p>
+<p>APPDSS &egrave; un applicativo atto alla realizzazione di mappe cartografiche tematiche.</p>
+<h1><a name="_Toc15973615"></a>2 TERMINOLOGIA E DEFINIZIONI</h1>
+<ul>
+<li>WMS: Per&nbsp;Web Map Service(WMS) si intende una specifica tecnica definita dall&rsquo;OGC, che produce dinamicamente mappe di dati spazialmente riferiti a partire da informazioni geografiche. Questo standard internazionale definisce una "mappa" come rappresentazione di informazioni geografiche restituendo un'immagine digitale idonea ad essere visualizzata su&nbsp;browser web.</li>
+</ul>
+<h1><a name="_Toc15973616"></a>3 PREREQUISITI</h1>
+<p>&nbsp;</p>
+<h2><a name="_Toc15973617"></a>3.1 Infrastruttura</h2>
+<p>Struttura mono-server con Ubuntu avente all&rsquo;interno:</p>
+<ul>
+<li>Apache 2.x</li>
+<li>Database Postgres 9.x(consigliata 9.5) con codifica UTF-8 e Postgis 2.x</li>
+<li>Mapserver&nbsp;<strong>x</strong>(consigliata 7.0.7) con cartella &lsquo;cgi-bin&rsquo; nella document root</li>
+</ul>
+<h2><a name="_Toc15973618"></a>3.2 Kit di riuso</h2>
+<p>Cartelle:</p>
+<ul>
+<li>Mapfiles: cartella dove vengono salvati tutti i map file;</li>
+<li>Config: cartella contenente impostazioni generali e di connessione;</li>
+<li>Src: cartella contenente Model, View e Controller del back-end;</li>
+<li>Webroot: cartella contenente il front-end e tutti i file accessibili.</li>
+</ul>
+<p>Database:</p>
+<ul>
+<li>File dump.sql contenente dati di prova.</li>
+</ul>
+<p>&nbsp;</p>
+<p>Elementi grafici:</p>
+<ul>
+<li>Webroot/resources/images: cartella contenente tutte le icone riguardanti i pulsanti dell&rsquo;applicativo e la generazione del pdf;
+<ul>
+<li>png : 202x55px, immagine del riquadro in basso a destra del pdf</li>
+<li>png : 200x85px, immagine del riquadro in alto a destra del pdf</li>
+</ul>
+</li>
+</ul>
+<p>&nbsp;</p>
+<h2><a name="_Toc15973619"></a>3.3 Pre-requisiti, vincoli e criticit&agrave;</h2>
+<p>Webserver:</p>
+<ul>
+<li>PHP 5.6.x</li>
+<li>Estensioni intl, mbstring, libxml, pdo_pgsql, zip, zlib installate</li>
+</ul>
+<p>Cartelle aventi tutti i permessi:</p>
+<ul>
+<li>Mapfiles</li>
+<li>Config</li>
+<li>Tmp</li>
+<li>Webroot</li>
+<li>Logs</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h1><a name="_Toc15973620"></a>4 CONFIGURAZIONE</h1>
+<p>&nbsp;</p>
+<h2><a name="_Toc15973621"></a>4.1 Configurazione del sistema</h2>
+<ol>
+<li>Scaricare la cartella del progetto, posizionarla nella document root del web server;</li>
+<li>Restaurare il file dump.sql all'interno di un database vuoto;</li>
+<li>Popolare la tabella &lsquo;limiti_comunali&rsquo; con i dati delle citt&agrave; desiderate ed eliminare i dati di esempio. E&rsquo; possibile alterare la proiezione del campo geometrico di questa tabella droppando il campo esistente e lanciando questa query</li>
+</ol>
+<p>SELECT AddGeometryColumn ('public','limiti_comunali','the_geom',[PROIEZIONE] ,'MULTIPOLYGON',2);</p>
+<ol>
+<li>Se non &egrave; presente, creare un collegamento alla cartella temporanea del web server all'interno della document root;</li>
+<li>Assicurarsi che le cartelle &lsquo;mapfiles&rsquo;, 'Config', 'tmp', 'webroot', &lsquo;logs&rsquo; e sottocartelle abbiano tutti i permessi necessari;</li>
+<li>Aprire il file <em>app.php</em> all&rsquo;interno della cartella Config e configurare la connessione a DB.</li>
+</ol>
+<h2><a name="_Toc15973622"></a><a name="_Toc15900380"></a>4.2 Configurazione elementi grafici</h2>
+<p>&nbsp;&nbsp; Seguire il path delle immagini indicato nella sezione 3.2 e cambiare le immagini di default con quelle desiderate, prestando attenzione a mantenere le stesse dimensioni delle precedenti.&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>&nbsp;</p>
+<h1><a name="_Toc15973623"></a>5 Installazione</h1>
+<ol>
+<li>Una volta configurato il sistema, accedere all&rsquo;applicativo tramite utente
+<ol>
+<li>Username: appdss</li>
+<li>Password: appdss2019</li>
+</ol>
+</li>
+</ol>
+<ol>
+<li>L'utente con cui si effettuer&agrave; il login &egrave; un utente Admin, il quale ha accesso al pannello di amministrazione. Saranno presenti delle impostazioni di esempio, per il funzionamento dell'applicativo &egrave; necessario modificarle in base alle vostre esigenze;</li>
+<li>Il campo &lsquo;proiezione&rsquo; e l&rsquo;extent della sezione &lsquo;Mapfile &ndash; Generale&rsquo; devono essere coerenti con la proiezione degli shape file caricati allo step 1 della creazione di un progetto;</li>
+<li>Per creare un nuovo progetto, aprire la scheda dedicata e seguire le indicazioni sovrastanti.</li>
+</ol>
+<h1><a name="_Toc15973624"></a>6 Creazione di un progetto</h1>
+<ol>
+<li>Aprire la sezione dedicata alla creazione di un progetto, quindi compilare i campi richiesti ed importare uno shape file di tipo POLYGON/MULTIPOLYGON(Es: Limiti comunali, Aree Omogenee);</li>
+<li>Importare uno shape file &lsquo;tematico&rsquo; (Es: Grafo stradale, terreno edificato);</li>
+<li>Selezionare un campo da classificare e la relativa azione, quindi attendere il procedimento;</li>
+<li>Al termine dell&rsquo;elaborazione si aprir&agrave; il Thematizer, dal quale &egrave; possibile classificare il dato appena ottenuto. Compilare tutti i campi richiesti;</li>
+<li>Premere &lsquo;Genera WMS&rsquo;, quindi &lsquo;Fine&rsquo; per completare la creazione del progetto.</li>
+</ol>
+<p>Una volta entrati nel Thematizer &egrave; possibile fin da subito esportare in shape la tabella appena generata, tramite pulsante &lsquo;Esporta in shape&rsquo;.</p>
+<p>Il pulsante &lsquo;Genera PDF&rsquo; permette di ottenere il pdf relativo al progetto.</p>
+<p>Nel caso non si abbia finito di classificare, la funzione &lsquo;Salva&rsquo; permette di salvare le impostazioni attuali di classificazione e terminare la creazione del progetto.</p>
+<p><strong>Per maggiori informazioni riguardo alla creazione di un progetto, visualizzare la guida &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apposita.</strong></p>
