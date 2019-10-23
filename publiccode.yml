@@ -30,7 +30,7 @@ maintenance:
       phone: 0412501953
   contractors:
     - name: Corvallis S.p.A.
-      website: www.corvallis.it
+      website: http://www.corvallis.it
       until: '2020-09-30'
 legal:
   license: GPL-3.0-only
@@ -44,6 +44,7 @@ localisation:
   availableLanguages:
     - it
 it:
+  countryExtensionVersion: '0.2'
   riuso:
     codiceIPA: p_ve
   conforme:
@@ -63,12 +64,11 @@ description:
       dinamico in grado di rappresentare via web le informazioni sempre
       aggiornate del territorio analizzato.
 
+      Alcune delle funzionalità del sistema sono visualizzabili in
+      [questo](https://progettodesk.it/formazione-appdss-evoluzione/) video.
 
-      ​
     localisedName: AppDSS
     genericName: AppDSS
     documentation: 'https://github.com/ProgettoDeSK/KitRiuso-APPDSS.git'
     features:
       - Sistema generazione automatica di carte territoriali  tematiche
-    videos:
-      - ' https://progettodesk.it/formazione-appdss-evoluzione/'
