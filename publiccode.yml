@@ -5,8 +5,8 @@
 publiccodeYmlVersion: '0.2'
 name: AppDSS
 applicationSuite: Progetto DeSK
-url: 'https://github.com/ProgettoDeSK/KitRiuso-APPDSS'
-landingURL: 'https://github.com/ProgettoDeSK/KitRiuso-APPDSS.git'
+url: 'https://github.com/CittaMetropolitanaVenezia/DeSK-KitRiuso-APPDSS'
+landingURL: 'https://github.com/CittaMetropolitanaVenezia/DeSK-KitRiuso-APPDSS.git'
 releaseDate: '2019-08-05'
 softwareVersion: '1.0'
 developmentStatus: stable
@@ -35,7 +35,7 @@ maintenance:
 legal:
   license: GPL-3.0-only
   mainCopyrightOwner: Città metropolitana di Venezia
-  repoOwner: ProgettoDeSK
+  repoOwner: CittaMetropolitanaVenezia
 intendedAudience:
   countries:
     - it
@@ -55,6 +55,13 @@ description:
   it:
     shortDescription: Sistema di generazione automatica di carte territoriali  tematiche
     longDescription: >
+    Applicativo che fa parte del progetto DeSK (DEcision support System and Knowledge territoriale)  
+    al quale hanno collaborato città Metropolitana di Milano, Città Metropolitana di Genova, 
+    Provincia di Taranto e Città Metropolitana di Venezia con il supporto tecnico
+    dell'azienda Corvallis S.p.A. Il progetto nasce come riuso di quanto sviluppato 
+    da Città Metropolitana di Milano in precedente esperienza. 
+    Consta di un insieme di applicativi finalizzati alla concertazione e all'arricchimento
+    dell'informazione e della conoscenza territoriale.
       AppDSS permette  di realizzare mappe tematiche di indicatori territoriali
       e dati socio-economici, mettendo in relazione grandezze differenti ed
       ottenendo dei quadri geografici rappresentativi esportabili con i
@@ -69,6 +76,6 @@ description:
 
     localisedName: AppDSS
     genericName: AppDSS
-    documentation: 'https://github.com/ProgettoDeSK/KitRiuso-APPDSS.git'
+    documentation: 'https://github.com/CittaMetropolitanaVenezia/DeSK-KitRiuso-APPDSS.git'
     features:
       - Sistema generazione automatica di carte territoriali  tematiche
