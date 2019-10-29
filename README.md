@@ -1,5 +1,5 @@
-## APPDSS
-Applicativo atto alla realizzazione di mappe cartografiche tematiche. AppDSS è un sistema sviluppato nell'ambito del progetto DeSK che consente di effettuare la rappresentazione di mappe tematiche di indicatori territoriali 
+## APPDSS (APPLICATION DECISION SUPPORT SYSTEM)
+Applicativo per la realizzazione di mappe cartografiche tematiche. AppDSS è un sistema sviluppato nell'ambito del progetto DeSK che consente di effettuare la rappresentazione di mappe tematiche di indicatori territoriali 
 mettendo in relazione grandezze differenti ed ottenendo dei quadri geografici rappresentativi esportabili con i protocolli 
 WMS o producendo mappe in formato pdf; si tratta di un sistema  dinamico in grado di rappresentare via web le informazioni
 sempre aggiornate del territorio analizzato.
