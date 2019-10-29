@@ -55,13 +55,13 @@ description:
   it:
     shortDescription: Sistema di generazione automatica di carte territoriali  tematiche
     longDescription: >
-    Applicativo che fa parte del progetto DeSK (DEcision support System and Knowledge territoriale)  
-    al quale hanno collaborato città Metropolitana di Milano, Città Metropolitana di Genova, 
-    Provincia di Taranto e Città Metropolitana di Venezia con il supporto tecnico
-    dell'azienda Corvallis S.p.A. Il progetto nasce come riuso di quanto sviluppato 
-    da Città Metropolitana di Milano in precedente esperienza. 
-    Consta di un insieme di applicativi finalizzati alla concertazione e all'arricchimento
-    dell'informazione e della conoscenza territoriale.
+      Applicativo che fa parte del progetto DeSK (DEcision support System and Knowledge territoriale)  
+      al quale hanno collaborato città Metropolitana di Milano, Città Metropolitana di Genova, 
+      Provincia di Taranto e Città Metropolitana di Venezia con il supporto tecnico
+      dell'azienda Corvallis S.p.A. Il progetto nasce come riuso di quanto sviluppato 
+      da Città Metropolitana di Milano in precedente esperienza. 
+      Consta di un insieme di applicativi finalizzati alla concertazione e all'arricchimento
+      dell'informazione e della conoscenza territoriale.
       AppDSS permette  di realizzare mappe tematiche di indicatori territoriali
       e dati socio-economici, mettendo in relazione grandezze differenti ed
       ottenendo dei quadri geografici rappresentativi esportabili con i
